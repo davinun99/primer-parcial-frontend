@@ -48,6 +48,8 @@ import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 
 import { AppRoutes } from './app.routing';
+import { PaisComponent } from './pais/pais.component';
+import { PaisAgregarComponent } from './pais/pais-agregar/pais-agregar.component';
 
 @NgModule({
   exports: [
@@ -99,12 +101,16 @@ export class MaterialModule {}
         SidebarModule,
         NavbarModule,
         FooterModule,
-        FixedpluginModule
+        FixedpluginModule,
+        FormsModule
     ],
     declarations: [
         AppComponent,
         AdminLayoutComponent,
-        AuthLayoutComponent
+        AuthLayoutComponent,
+    
+        PaisComponent,
+        PaisAgregarComponent
     ],
     providers : [
       MatNativeDateModule

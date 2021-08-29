@@ -1,0 +1,14 @@
+<p>pais works!</p>
+<div *ngIf="paises.length>0">
+    <table border="1">
+      <tr>
+        <td>Id</td>
+        <td>Descripcion</td>
+      </tr>
+      <tr *ngFor="let p of paises">
+        <td>{{p.idPais}}</td>
+        <td>{{p.descripcion}}</td>
+      </tr>
+    </table>
+  </div>
+  

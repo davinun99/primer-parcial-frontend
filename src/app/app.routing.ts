@@ -1,7 +1,10 @@
-import { Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
+import { PaisAgregarComponent } from './pais/pais-agregar/pais-agregar.component';
+import { PaisComponent } from './pais/pais.component';
+import { NgModule } from '@angular/core';
 
 export const AppRoutes: Routes = [
     {
@@ -50,5 +53,19 @@ export const AppRoutes: Routes = [
         path: 'pages',
         loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)
       }]
-    }
+    },{
+        path:'pais',
+        component:PaisComponent
+      },
+      {
+        path:'nuevopais',
+        component:PaisAgregarComponent
+      }
 ];
+
+@NgModule({
+    imports: [RouterModule.forRoot(AppRoutes)],
+    exports: [RouterModule]
+  })
+  export class AppRoutingModule { }
+  
