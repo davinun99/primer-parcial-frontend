@@ -50,6 +50,8 @@ import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { AppRoutes } from './app.routing';
 import { PaisComponent } from './pais/pais.component';
 import { PaisAgregarComponent } from './pais/pais-agregar/pais-agregar.component';
+import { CategoriasComponent } from './categorias/categorias.component';
+import { CategoriasAgregarComponent } from './categorias/categorias-agregar/categorias-agregar.component';
 
 @NgModule({
   exports: [
@@ -110,7 +112,9 @@ export class MaterialModule {}
         AuthLayoutComponent,
     
         PaisComponent,
-        PaisAgregarComponent
+        PaisAgregarComponent,
+        CategoriasComponent,
+        CategoriasAgregarComponent        
     ],
     providers : [
       MatNativeDateModule

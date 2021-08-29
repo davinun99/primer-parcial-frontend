@@ -5,6 +5,8 @@ import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { PaisAgregarComponent } from './pais/pais-agregar/pais-agregar.component';
 import { PaisComponent } from './pais/pais.component';
 import { NgModule } from '@angular/core';
+import { CategoriasComponent } from './categorias/categorias.component';
+import { CategoriasAgregarComponent } from './categorias/categorias-agregar/categorias-agregar.component';
 
 export const AppRoutes: Routes = [
     {
@@ -60,7 +62,16 @@ export const AppRoutes: Routes = [
       {
         path:'nuevopais',
         component:PaisAgregarComponent
-      }
+      },{
+        path:'categorias',
+        component:CategoriasComponent
+       },
+       {
+         path:'nuevacategorias',
+         component:CategoriasAgregarComponent
+       }
+      
+       
 ];
 
 @NgModule({
