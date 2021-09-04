@@ -9,7 +9,7 @@ import {tap} from "rxjs/operators";
   providedIn: 'root'
 })
 export class ServiceCategoriasService {
-  private api: string ="http://181.123.253.74:8080/stock-pwfe/categoría";
+  private api: string ="http://181.123.243.5:8080/stock-pwfe/categoria";
   constructor(private http: HttpClient) { }
   
   getCategorias(): Observable<listadatos<Categorias>> {

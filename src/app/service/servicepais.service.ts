@@ -11,23 +11,23 @@ import {tap} from "rxjs/operators";
 })
 export class ServicepaisService {
   
-  private api: string ="http://181.123.253.74:8080/stock/pais";
+  private api: string ="http://181.123.243.5:8080/stock/pais";
   constructor(private http: HttpClient) { }
   
   getPaises(): Observable<listadatos<Pais>> {
     return this.http.get<listadatos<Pais>>(this.api);
    }
 
-   agregarPais(p:Pais): Observable<Pais> {
-  return this.http
-    .post<Pais>(this.api, p)
-    .pipe(
-      tap( // Log the result or error
+  agregarPais(p:Pais): Observable<Pais> {
+      return this.http
+        .post<Pais>(this.api, p)
+        .pipe(
+          tap( // Log the result or error
 
-        data => console.log('agregado '+data),
-        error => console.log("error: "+error)
-      )
-    );
+            data => console.log('agregado '+data),
+            error => console.log("error: "+error)
+          )
+        );
   }
-  
+
 }
