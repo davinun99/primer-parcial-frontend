@@ -4,6 +4,7 @@ import { Pais } from '../model/pais';
 import { listadatos } from '../model/datos';
 import { Observable } from 'rxjs';
 import {tap} from "rxjs/operators";
+import endpoint from 'src/utils';
 
 
 @Injectable({
@@ -11,7 +12,7 @@ import {tap} from "rxjs/operators";
 })
 export class ServicepaisService {
   
-  private api: string ="http://181.123.253.74:8080/stock/pais";
+  private api: string = endpoint + "/stock/pais";
   constructor(private http: HttpClient) { }
   
   getPaises(): Observable<listadatos<Pais>> {
