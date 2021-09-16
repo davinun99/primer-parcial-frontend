@@ -119,8 +119,6 @@ export class MaterialModule {}
         SubcategoriaComponent
     ],
     providers : [
-      ServicepaisService,
-      ServiceCategoriasService
     ],
     bootstrap:    [ AppComponent ]
 })
