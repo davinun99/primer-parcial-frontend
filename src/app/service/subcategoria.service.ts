@@ -10,7 +10,7 @@ import Subcategoria from '../model/subcategoria';
 @Injectable({
   providedIn: 'root'
 })
-export class ServicepaisService {
+export default class ServiceSubcategoria {
   
   private api: string = endpoint + "/stock-pwfe/tipoProducto";
   constructor(private http: HttpClient) { }

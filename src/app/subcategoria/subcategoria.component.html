@@ -1,1 +1,14 @@
-<p>subcategoria works!</p>
+<p>Subcategorias de la categoria {{idCategoria}} </p>
+<div *ngIf="subcategorias.length>0">
+    <table border="1">
+      <tr>
+        <td>Id</td>
+        <td>Descripcion</td>
+      </tr>
+      <tr *ngFor="let s of subcategorias">
+        <td>{{s.idTipoProducto}}</td>
+        <td>{{s.descripcion}}</td>
+      </tr>
+    </table>
+  </div>
+  
