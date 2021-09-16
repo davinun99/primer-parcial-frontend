@@ -8,7 +8,7 @@ import { NgModule } from '@angular/core';
 import { CategoriasComponent } from './categorias/categorias.component';
 import { CategoriasAgregarComponent } from './categorias/categorias-agregar/categorias-agregar.component';
 import { SubcategoriaComponent } from './subcategoria/subcategoria.component';
-
+import { PacienteComponent } from './paciente/paciente.component'
 export const AppRoutes: Routes = [
     {
       path: '',
@@ -74,6 +74,10 @@ export const AppRoutes: Routes = [
        {
          path: 'subcategoria',
          component: SubcategoriaComponent
+       },
+       {
+         path: 'paciente',
+         component: PacienteComponent
        }
       
        

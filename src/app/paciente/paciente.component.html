@@ -1,0 +1,13 @@
+<p>paciente works!</p>
+<div *ngIf="pacientes.length>0">
+    <table border="1">
+        <tr>
+            <td>Id</td>
+            <td>Nombre</td>
+        </tr>
+        <tr *ngFor="let p of pacientes">
+            <td>{{p.idPersona}}</td>
+            <td>{{p.nombre}}</td>
+        </tr>
+    </table>
+</div>
