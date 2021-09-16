@@ -8,6 +8,7 @@
       <tr *ngFor="let c of categorias">
         <td>{{c.idCategoria}}</td>
         <td>{{c.descripcion}}</td>
+        <td><a [routerLink]="['/subcategoria']" [queryParams]="{idCategoria: c.idCategoria}" > Ver subcategorias </a></td>
       </tr>
     </table>
   </div>
