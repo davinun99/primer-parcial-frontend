@@ -52,8 +52,7 @@ import { PaisComponent } from './pais/pais.component';
 import { PaisAgregarComponent } from './pais/pais-agregar/pais-agregar.component';
 import { CategoriasComponent } from './categorias/categorias.component';
 import { CategoriasAgregarComponent } from './categorias/categorias-agregar/categorias-agregar.component';
-import { ServicepaisService } from './service/servicepais.service'
-import { ServiceCategoriasService } from './service/service-categorias.service'
+import { SubcategoriaComponent } from './subcategoria/subcategoria.component';
 
 @NgModule({
   exports: [
@@ -116,7 +115,8 @@ export class MaterialModule {}
         PaisComponent,
         PaisAgregarComponent,
         CategoriasComponent,
-        CategoriasAgregarComponent        
+        CategoriasAgregarComponent,
+        SubcategoriaComponent
     ],
     providers : [
       ServicepaisService,

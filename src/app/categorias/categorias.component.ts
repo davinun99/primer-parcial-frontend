@@ -14,7 +14,9 @@ export class CategoriasComponent implements OnInit {
 
   ngOnInit(): void {
     this.servicioCategorias.getCategorias().subscribe(
-      entity => this.categorias = entity.lista,
+      entity => {
+        this.categorias = entity.lista
+      },
       error =>console.log('no se pudieron conseguir las categorias')
      );
   }
