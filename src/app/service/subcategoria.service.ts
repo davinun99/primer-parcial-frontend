@@ -19,9 +19,9 @@ export default class ServiceSubcategoria {
     const categoriaObj: Object = {"idCategoria":{"idCategoria": idCategoria}};
     return this.http.get<listadatos<Subcategoria>>(`${this.api}/?ejemplo=${encodeURIComponent(JSON.stringify(categoriaObj))}`);
   }
-   agregarSubcategorias(p:Subcategoria): Observable<Subcategoria> {
-  return this.http
-    .post<Subcategoria>(this.api, p)
+   agregarSubcategorias(subC:Subcategoria): Observable<Subcategoria> {
+    return this.http
+    .post<Subcategoria>(this.api, subC)
     .pipe(
       tap( // Log the result or error
 
