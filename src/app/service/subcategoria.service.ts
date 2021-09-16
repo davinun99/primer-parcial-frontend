@@ -10,7 +10,7 @@ import Subcategoria from '../model/subcategoria';
 @Injectable({
   providedIn: 'root'
 })
-export class ServicepaisService {
+export default class ServiceSubcategoria {
   
   private api: string = endpoint + "/stock-pwfe/tipoProducto";
   constructor(private http: HttpClient) { }
@@ -19,9 +19,9 @@ export class ServicepaisService {
     const categoriaObj: Object = {"idCategoria":{"idCategoria": idCategoria}};
     return this.http.get<listadatos<Subcategoria>>(`${this.api}/?ejemplo=${encodeURIComponent(JSON.stringify(categoriaObj))}`);
   }
-   agregarSubcategorias(p:Subcategoria): Observable<Subcategoria> {
-  return this.http
-    .post<Subcategoria>(this.api, p)
+   agregarSubcategorias(subC:Subcategoria): Observable<Subcategoria> {
+    return this.http
+    .post<Subcategoria>(this.api, subC)
     .pipe(
       tap( // Log the result or error
 

@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Categorias } from '../model/categorias';
+import Subcategoria from '../model/subcategoria';
+import ServiceSubcategoria from '../service/subcategoria.service';
 
 @Component({
   selector: 'app-subcategoria',
@@ -6,10 +10,41 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./subcategoria.component.css']
 })
 export class SubcategoriaComponent implements OnInit {
-
-  constructor() { }
+  subcategorias: Subcategoria[] = [];
+  mensaje: string = "";
+  idCategoria: number = 0;
+  nuevaSubcategoria: Subcategoria = new Subcategoria();
+  constructor( private servicioSubcategorias: ServiceSubcategoria, private route: ActivatedRoute ) { }
 
   ngOnInit(): void {
+    this.route.queryParams.filter(params => params.idCategoria).subscribe(params => {
+      this.idCategoria = params.idCategoria;
+    })
+    if( this.idCategoria )
+    this.updateSubcategorias();
   }
+  updateSubcategorias(): void {
+    this.servicioSubcategorias.getSubcategoriasById(this.idCategoria).subscribe(
+      entity => {
+        this.subcategorias = entity.lista
+      },error => {
+        console.log('No se obtuvieron las subcategorias! ', error)
+      });
+  }
+  guardar(): void{
+    const categoria: Categorias = new Categorias();
+    categoria.idCategoria = this.idCategoria;
+    this.nuevaSubcategoria.idCategoria = categoria;
+    this.servicioSubcategorias.agregarSubcategorias(this.nuevaSubcategoria).subscribe(
+      () => {
+        this.mensaje='Agregado exitosamente'
+        this.updateSubcategorias();
+      },
+      error => {
+        console.log("error: "+error)
+        this.mensaje = 'No se obtuvieron las subcategorias! ' + error;
+      }
+    );
+   }
 
 }
