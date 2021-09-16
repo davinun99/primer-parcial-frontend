@@ -52,6 +52,8 @@ import { PaisComponent } from './pais/pais.component';
 import { PaisAgregarComponent } from './pais/pais-agregar/pais-agregar.component';
 import { CategoriasComponent } from './categorias/categorias.component';
 import { CategoriasAgregarComponent } from './categorias/categorias-agregar/categorias-agregar.component';
+import { SubcategoriaComponent } from './subcategoria/subcategoria.component';
+import { PacienteComponent } from './paciente/paciente.component';
 
 @NgModule({
   exports: [
@@ -85,6 +87,9 @@ import { CategoriasAgregarComponent } from './categorias/categorias-agregar/cate
     MatToolbarModule,
     MatTooltipModule,
     MatNativeDateModule
+  ],
+  declarations: [
+
   ]
 })
 export class MaterialModule {}
@@ -114,10 +119,12 @@ export class MaterialModule {}
         PaisComponent,
         PaisAgregarComponent,
         CategoriasComponent,
-        CategoriasAgregarComponent        
+        CategoriasAgregarComponent,
+        SubcategoriaComponent,
+        PacienteComponent,
     ],
     providers : [
-      MatNativeDateModule
+        MatNativeDateModule
     ],
     bootstrap:    [ AppComponent ]
 })
