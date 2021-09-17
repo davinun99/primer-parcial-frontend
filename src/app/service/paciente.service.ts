@@ -16,6 +16,7 @@ export class PacienteService {
   getPacientes(): Observable<listadatos<Paciente>> {
     return this.http.get<listadatos<Paciente>>(this.api);
    }
+
   agregarPaciente(p:Paciente): Observable<Paciente>{
     return this.http
         .post<Paciente>(this.api,p)
