@@ -89,11 +89,7 @@ import { ServiciosComponent } from './servicios/servicios.component';
     MatTooltipModule,
     MatNativeDateModule
   ],
-  declarations: [
-
-  
-    ServiciosComponent
-  ]
+  declarations: []
 })
 export class MaterialModule {}
 
@@ -125,6 +121,7 @@ export class MaterialModule {}
         CategoriasAgregarComponent,
         SubcategoriaComponent,
         PacienteComponent,
+        ServiciosComponent,
     ],
     providers : [
         MatNativeDateModule

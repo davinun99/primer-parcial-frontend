@@ -52,7 +52,6 @@ export class SubcategoriaComponent implements OnInit {
   buscar(): void{
     this.servicioSubcategorias.getSubcategoriasByDescripcion(this.nuevaSubcategoria.descripcion).subscribe(
       entity => {
-        console.log(entity);
         this.subcategorias = entity.lista;
         this.mensaje = '';
       },error => {

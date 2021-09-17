@@ -9,6 +9,7 @@
   <p >Subcategorias de la categoria {{idCategoria}} </p>
 </div>
 <ng-template #sinCategoria>
+  <h2>Buscar subcategoria</h2><br/>
   Descripcion de la subcategoria: <input  [(ngModel)]="nuevaSubcategoria.descripcion">
     <br>
      <button (click)="buscar()">Buscar</button>
@@ -25,6 +26,9 @@
     <tr *ngFor="let s of subcategorias">
       <td>{{s.idTipoProducto}}</td>
       <td>{{s.descripcion}}</td>
+      <td>
+        <a [routerLink]="['/servicios']" [queryParams]="{idSubCategoria: s.idTipoProducto}" > Ver servicios </a>
+      </td>
     </tr>
   </table>
 </div>
