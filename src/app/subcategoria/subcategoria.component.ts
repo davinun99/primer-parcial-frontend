@@ -21,14 +21,16 @@ export class SubcategoriaComponent implements OnInit {
       this.idCategoria = params.idCategoria;
     })
     if( this.idCategoria )
-    this.updateSubcategorias();
+    this.getSubcategorias();
   }
-  updateSubcategorias(): void {
+  getSubcategorias(): void {
     this.servicioSubcategorias.getSubcategoriasById(this.idCategoria).subscribe(
       entity => {
         this.subcategorias = entity.lista
+        this.mensaje=''
       },error => {
         console.log('No se obtuvieron las subcategorias! ', error)
+        this.mensaje='No se obtuvieron las subcategorias! ' + error;
       });
   }
   guardar(): void{
@@ -38,13 +40,26 @@ export class SubcategoriaComponent implements OnInit {
     this.servicioSubcategorias.agregarSubcategorias(this.nuevaSubcategoria).subscribe(
       () => {
         this.mensaje='Agregado exitosamente'
-        this.updateSubcategorias();
+        this.getSubcategorias();
+        this.mensaje = '';
       },
       error => {
         console.log("error: "+error)
         this.mensaje = 'No se obtuvieron las subcategorias! ' + error;
       }
     );
-   }
+  }
+  buscar(): void{
+    this.servicioSubcategorias.getSubcategoriasByDescripcion(this.nuevaSubcategoria.descripcion).subscribe(
+      entity => {
+        console.log(entity);
+        this.subcategorias = entity.lista;
+        this.mensaje = '';
+      },error => {
+        console.log('No se obtuvieron las subcategorias! ', error);
+        this.mensaje = 'No se obtuvieron las subcategorias! ' + error;
+      }
+    );
+  }
 
 }
