@@ -30,5 +30,9 @@ export default class ServiceSubcategoria {
       )
     );
   }
-  
+  getSubcategoriasByDescripcion(descripcion: string): Observable<listadatos<Subcategoria>> {
+    const categoriaObj: Object = {descripcion};
+    const subcategorias: Observable<listadatos<Subcategoria>> = this.http.get<listadatos<Subcategoria>>(`${this.api}?like=S&ejemplo=${encodeURIComponent(JSON.stringify(categoriaObj))}`);
+    return subcategorias;
+  }
 }
