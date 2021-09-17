@@ -9,13 +9,13 @@ import { PacienteService } from '../service/paciente.service';
   styleUrls: ['./paciente.component.css']
 })
 export class PacienteComponent implements OnInit {
-  pacientes: Paciente[]=[];
+  paciente: Paciente[]=[];
 
   constructor(private servicioPaciente: PacienteService) { }
 
   ngOnInit(): void {
     this.servicioPaciente.getPacientes().subscribe(
-          entity => this.pacientes = entity.lista,
+          entity => this.paciente = entity.lista,
           error =>console.log('no se pudieron conseguir los pacientes')
     )
   }

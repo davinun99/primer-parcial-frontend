@@ -1,11 +1,14 @@
 <p>paciente works!</p>
-<div *ngIf="pacientes.length>0">
+<br/>
+<a routerLink="/nuevopaciente">Agregar paciente</a>
+<br/>
+<div *ngIf="paciente.length>0">
     <table border="1">
         <tr>
             <td>Id</td>
             <td>Nombre</td>
         </tr>
-        <tr *ngFor="let p of pacientes">
+        <tr *ngFor="let p of paciente">
             <td>{{p.idPersona}}</td>
             <td>{{p.nombre}}</td>
         </tr>

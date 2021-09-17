@@ -42,6 +42,12 @@ export const ROUTES: RouteInfo[] = [{
             {path: 'typography', title: 'Typography', ab:'T'}
         ]
     },{
+        path: '/paciente',
+        title: 'Pacientes',
+        type: 'link',
+        icontype: 'apps',
+
+    },{
         path: '/forms',
         title: 'Forms',
         type: 'sub',

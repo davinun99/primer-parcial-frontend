@@ -9,6 +9,7 @@ import { CategoriasComponent } from './categorias/categorias.component';
 import { CategoriasAgregarComponent } from './categorias/categorias-agregar/categorias-agregar.component';
 import { SubcategoriaComponent } from './subcategoria/subcategoria.component';
 import { PacienteComponent } from './paciente/paciente.component'
+import { PacienteAgregarComponent } from './paciente/paciente-agregar/paciente-agregar.component'
 export const AppRoutes: Routes = [
     {
       path: '',
@@ -78,6 +79,10 @@ export const AppRoutes: Routes = [
        {
          path: 'paciente',
          component: PacienteComponent
+       },
+       {
+         path: 'nuevopaciente',
+         component: PacienteAgregarComponent
        }
       
        
