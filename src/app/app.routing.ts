@@ -9,7 +9,13 @@ import { CategoriasComponent } from './categorias/categorias.component';
 import { CategoriasAgregarComponent } from './categorias/categorias-agregar/categorias-agregar.component';
 import { SubcategoriaComponent } from './subcategoria/subcategoria.component';
 import { PacienteComponent } from './paciente/paciente.component'
+import { PacienteAgregarComponent } from './paciente/paciente-agregar/paciente-agregar.component'
 import { ServiciosComponent } from './servicios/servicios.component';
+import { HorarioComponent } from './horario/horario.component';
+import { HorarioAgregarComponent } from './horario/horario-agregar/horario-agregar.component';
+import { HorarioexcComponent } from './horarioexc/horarioexc.component';
+import { HorariopComponent } from './horario/horariop.component';
+
 export const AppRoutes: Routes = [
     {
       path: '',
@@ -83,7 +89,28 @@ export const AppRoutes: Routes = [
        {
          path: 'servicios',
          component: ServiciosComponent
-       }
+       },
+       {
+         path: 'nuevopaciente',
+         component: PacienteAgregarComponent
+       },
+       {
+         path: 'horario',
+         component: HorarioComponent,
+
+       },
+       {
+         path: 'nuevohorario',
+         component: HorarioAgregarComponent
+       },
+       {
+         path: 'horarioexc',
+         component: HorarioexcComponent
+       },{
+        path: 'horariop',
+        component: HorariopComponent,
+      },
+      
       
        
 ];

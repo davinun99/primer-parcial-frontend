@@ -55,6 +55,12 @@ import { CategoriasAgregarComponent } from './categorias/categorias-agregar/cate
 import { SubcategoriaComponent } from './subcategoria/subcategoria.component';
 import { PacienteComponent } from './paciente/paciente.component';
 import { ServiciosComponent } from './servicios/servicios.component';
+import { PacienteAgregarComponent } from './paciente/paciente-agregar/paciente-agregar.component';
+import { HorarioComponent } from './horario/horario.component';
+import { HorarioAgregarComponent } from './horario/horario-agregar/horario-agregar.component';
+import { HorarioexcComponent } from './horarioexc/horarioexc.component';
+import { HorariopComponent } from './horario/horariop.component';
+
 
 @NgModule({
   exports: [
@@ -89,7 +95,9 @@ import { ServiciosComponent } from './servicios/servicios.component';
     MatTooltipModule,
     MatNativeDateModule
   ],
-  declarations: []
+  declarations: [  
+  
+  ]
 })
 export class MaterialModule {}
 
@@ -122,6 +130,12 @@ export class MaterialModule {}
         SubcategoriaComponent,
         PacienteComponent,
         ServiciosComponent,
+        PacienteAgregarComponent,
+        HorarioComponent,
+        HorarioAgregarComponent,
+        HorarioexcComponent,
+        HorariopComponent,
+
     ],
     providers : [
         MatNativeDateModule
