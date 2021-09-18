@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { FichaClinicaService } from '../service/ficha-clinica.service';
+import swal from 'sweetalert2';
 
 import { Subject } from 'rxjs';
 import fichaClinica from '../model/fichaClinica';
@@ -46,8 +47,8 @@ export class FichaClinicaComponent implements OnInit, AfterViewInit, OnDestroy {
      );
      
       this.dataTable = {
-          headerRow: [ 'motivoConsulta', 'diagnostico','observacion','idEmpleado','idCliente','idTipoProducto','idCategoria' ],
-          footerRow: [ 'motivoConsulta', 'diagnostico','observacion','idEmpleado','idCliente','idTipoProducto','idCategoria' ],
+          headerRow: [ 'idFichaClinica','motivoConsulta', 'diagnostico','observacion','idEmpleado','idCliente','idTipoProducto','idCategoria' ],
+          footerRow: [ 'idFichaClinica','motivoConsulta', 'diagnostico','observacion','idEmpleado','idCliente','idTipoProducto','idCategoria' ],
 
           dataRows: [
           ]
@@ -94,8 +95,46 @@ export class FichaClinicaComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
   }
+  idFichaClinica: null;
+  observacion:null;
+  
 
+  editarFichaClinica() {
 
+    
+      this.fichaClinicaService.editarFichaClinica(this.idFichaClinica,this.observacion).subscribe(
+        () => {
+          swal.fire({
+            title: 'Editado!',
+            text: 'Se edito la ficha de cliente exitosamente.',
+            icon: 'success',
+            customClass: {
+              confirmButton: 'btn btn-success',
+            },
+            buttonsStyling: false,
+          }
+          ).then(() => {
+            this.router.navigate(['/fichaclinica']);
+            location.reload();
+          });
+        },
+        (error) => {
+          console.log(error);
+          let message = 'La ficha no pudo ser editada. \n';
+          message += error.error ? error.error : error.message;
+          swal.fire({
+            title: 'Error!',
+            text: message,
+            icon: 'error',
+            customClass: {
+              confirmButton: 'btn btn-danger',
+            },
+              buttonsStyling: false,
+            });
+          }
+        );
+      
+    }
  
   ngAfterViewInit() {
     $('#datatables').DataTable({

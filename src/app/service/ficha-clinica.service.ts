@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 import { listadatos } from '../model/datos';
-import { Horario } from '../model/horario';
+
 import endpoint from 'src/utils';
 import fichaClinica from '../model/fichaClinica';
 
@@ -56,6 +56,19 @@ export class FichaClinicaService {
       )
     );
   }
-
+  editarFichaClinica(idFichaClinica: number,observacion:string ): Observable<fichaClinica> {
+    let headers = new HttpHeaders({
+      'Content-Type':'application/json',
+      'usuario': 'usuario4'
+    });
+    const body = { "idFichaClinica": idFichaClinica,"observacion":observacion  };
+    return this.http.put<fichaClinica>(this.api, body,{ headers} ).pipe(
+      tap(
+        // Log the result or error
+        (data) => console.log('editado ' + data),
+        (error) => console.log('error: ' + error)
+      )
+    );
+  }
 
 }

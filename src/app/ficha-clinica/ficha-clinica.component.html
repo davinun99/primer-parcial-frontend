@@ -3,13 +3,13 @@
     <div class="container-fluid">
 <!--FILTRO ENTRE FECHAS-->
 <div class="row" >
-        <div class="col-md-3">
+        <div class="col-md-2">
           <div class="card ">
             <div class="card-header card-header-primary card-header-icon">
                 <div class="card-icon">
-                  <i class="material-icons">assignment</i>
+                  <i class="material-icons">search</i>
                 </div>
-                <h4 class="card-title">Filtrar entre fechas</h4>
+                <h5 class="card-title"><small>Filtrar entre fechas</small></h5>
               </div>
             <div class="card-body ">
               <form method="#" action="#" >
@@ -17,14 +17,14 @@
                  
                   <div class="col-sm-12">
                     <mat-form-field >
-                      <input matInput name="fechaDesdeCadena" placeholder="fechaDesdeCadena" type="text" [(ngModel)]="fechas.fechaDesdeCadena" >
+                      <input matInput name="fechaDesdeCadena" placeholder="fechaDesdeCadena" type="number" [(ngModel)]="fechas.fechaDesdeCadena" required>
                     </mat-form-field>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-sm-12">
                     <mat-form-field >
-                      <input matInput name="fechaHastaCadena" placeholder="fechaHastaCadena" type="text"[(ngModel)]="fechas.fechaHastaCadena"  >
+                      <input matInput name="fechaHastaCadena" placeholder="fechaHastaCadena" type="number"[(ngModel)]="fechas.fechaHastaCadena"  required>
                     </mat-form-field>
                   </div>
                 </div>
@@ -44,13 +44,13 @@
           </div>
         </div>
  <!--FILTRO POR ID DE PACIENTES--> 
-        <div class="col-md-3">
+        <div class="col-md-2">
             <div class="card ">
               <div class="card-header card-header-primary card-header-icon">
                   <div class="card-icon">
-                    <i class="material-icons">assignment</i>
+                    <i class="material-icons">search</i>
                   </div>
-                  <h4 class="card-title">Fichas del paciente por id</h4>
+                  <h5 class="card-title"><small>Fichas del paciente por id</small></h5>
                 </div>
               <div class="card-body ">
                 <form method="#" action="#" >
@@ -58,7 +58,7 @@
                    
                     <div class="col-sm-12">
                       <mat-form-field class="example-full-width">
-                        <input matInput name="idPaciente" placeholder="idPaciente" type="text" [(ngModel)]="idPaciente" >
+                        <input matInput name="idPaciente" placeholder="idPaciente" type="number" [(ngModel)]="idPaciente" required>
                       </mat-form-field>
                     </div>
                   </div>
@@ -77,13 +77,13 @@
             </div>
           </div>
  <!--FILTRO POR ID DE idEmpleado--> 
-        <div class="col-md-3">
+        <div class="col-md-2">
             <div class="card ">
               <div class="card-header card-header-primary card-header-icon">
                   <div class="card-icon">
-                    <i class="material-icons">assignment</i>
+                    <i class="material-icons">search</i>
                   </div>
-                  <h4 class="card-title">Fichas del paciente por id de fisioterapeuta</h4>
+                  <h5 class="card-title"><small>Fichas del paciente por id de fisioterapeuta</small></h5>
                 </div>
               <div class="card-body ">
                 <form method="#" action="#" >
@@ -91,7 +91,7 @@
                    
                     <div class="col-sm-12">
                       <mat-form-field class="example-full-width">
-                        <input matInput name="idEmpleado" placeholder="idEmpleado" type="text" [(ngModel)]="idEmpleado" >
+                        <input matInput name="idEmpleado" placeholder="idEmpleado" type="number" [(ngModel)]="idEmpleado" required>
                       </mat-form-field>
                     </div>
                   </div>
@@ -110,13 +110,13 @@
             </div>
           </div>
  <!--FILTRO POR ID DE subcategoria--> 
-        <div class="col-md-3">
+        <div class="col-md-2">
             <div class="card ">
               <div class="card-header card-header-primary card-header-icon">
                   <div class="card-icon">
-                    <i class="material-icons">assignment</i>
+                    <i class="material-icons">search</i>
                   </div>
-                  <h4 class="card-title">Fichas del paciente por id de subcategoría </h4>
+                  <h5 class="card-title"><small>Fichas del paciente por id de subcategoría</small> </h5>
                 </div>
               <div class="card-body ">
                 <form method="#" action="#" >
@@ -124,7 +124,7 @@
                    
                     <div class="col-sm-12">
                       <mat-form-field class="example-full-width">
-                        <input matInput name="idTipoProducto" placeholder="idTipoProducto" type="text" [(ngModel)]="idTipoProducto" >
+                        <input matInput name="idTipoProducto" placeholder="idTipoProducto" type="number" [(ngModel)]="idTipoProducto" required >
                       </mat-form-field>
                     </div>
                   </div>
@@ -142,8 +142,48 @@
               </div>
             </div>
           </div>
+ <!--Editar--> 
+        <div class="col-md-3">
+            <div class="card " style="color: aqua;">
+              <div class="card-header card-header-primary card-header-icon" >
+                  <div class="card-icon">
+                    <span class="material-icons">
+                      edit
+                      </span>
+                  </div>
+                  <h5 class="card-title"><small>Editar obs de Ficha</small>  </h5>
+                </div>
+              <div class="card-body ">
+                <form method="#" action="#" >
+                  <div class="row">
+                   
+                    <div class="col-sm-12">
+                      <mat-form-field class="example-full-width">
+                        <input matInput name="idFichaClinica" placeholder="idFichaClinica" type="number" [(ngModel)]="idFichaClinica" required>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-sm-12">
+                      <mat-form-field class="example-full-width">
+                        <input matInput name="observacion" placeholder="observacion" type="text" [(ngModel)]="observacion" required>
+                      </mat-form-field>
+                    </div>
+                  </div>
 
+                </form>
+              </div>
+              <div class="card-footer ">
+                <div class="row">
+                  <div class="col-md-12">
+  
+                    <button mat-raised-button class="btn btn-fill btn-primary mx-2" (click)='editarFichaClinica()' >Actualizar</button>
+  
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
+<app-ficha-clinica-agregar></app-ficha-clinica-agregar>
 
 
         </div>
@@ -161,6 +201,7 @@
                       <i class="material-icons">assignment</i>
                     </div>
                     <h4 class="card-title">Lista de fichas clinicas</h4>
+                    
                   </div>
                     <div class="card-body">
                         <div class="toolbar">
@@ -177,6 +218,7 @@
                                       <th>{{ dataTable.headerRow[4] }}</th>
                                       <th>{{ dataTable.headerRow[5] }}</th>
                                       <th>{{ dataTable.headerRow[6] }}</th>
+                                      <th>{{ dataTable.headerRow[7] }}</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
@@ -188,10 +230,12 @@
                                         <th>{{ dataTable.headerRow[4] }}</th>
                                         <th>{{ dataTable.headerRow[5] }}</th>                                 
                                         <th>{{ dataTable.headerRow[6] }}</th>                                 
+                                        <th>{{ dataTable.headerRow[7] }}</th>                                 
                                     </tr>
                                 </tfoot>
                                 <tbody>
                                   <tr *ngFor="let c of fichaClinica">
+                                    <td>{{c.idFichaClinica}}</td>
                                     <td>{{c.motivoConsulta}}</td>
                                     <td>{{c.diagnostico}}</td>
                                     <td>{{c.observacion}}</td>

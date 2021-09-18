@@ -3,10 +3,6 @@ import { Router } from '@angular/router';
 import fichaClinica from 'src/app/model/fichaClinica';
 import { FichaClinicaService } from 'src/app/service/ficha-clinica.service';
 import swal from 'sweetalert2';
-import { Horario } from '../../model/horario';
-import { Paciente } from '../../model/paciente';
-import { HorarioService } from '../../service/horario.service';
-import { PacienteService } from '../../service/paciente.service';
 
 @Component({
   selector: 'app-ficha-clinica-agregar',
@@ -34,8 +30,8 @@ export class FichaClinicaAgregarComponent implements OnInit {
       this.fichaClinicaService.agregarFichaClinica(this.data).subscribe(
         () => {
           swal.fire({
-            title: 'Actualizado!',
-            text: 'El nuevo horario fue actualizado exitosamente.',
+            title: 'Creado!',
+            text: 'La nueva ficha de cliente exitosamente.',
             icon: 'success',
             customClass: {
               confirmButton: 'btn btn-success',
@@ -47,7 +43,7 @@ export class FichaClinicaAgregarComponent implements OnInit {
         },
         (error) => {
           console.log(error);
-          let message = 'El paciente no pudo ser editado. \n';
+          let message = 'La ficha no pudo ser creada. \n';
           message += error.error ? error.error : error.message;
           swal.fire({
             title: 'Error!',

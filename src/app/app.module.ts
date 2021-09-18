@@ -103,6 +103,7 @@ import { FichaClinicaAgregarComponent } from './ficha-clinica/ficha-clinica-agre
     
   
     
+
   ]
 })
 export class MaterialModule {}
