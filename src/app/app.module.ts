@@ -56,6 +56,8 @@ import { SubcategoriaComponent } from './subcategoria/subcategoria.component';
 import { PacienteComponent } from './paciente/paciente.component';
 import { ServiciosComponent } from './servicios/servicios.component';
 import { PacienteAgregarComponent } from './paciente/paciente-agregar/paciente-agregar.component';
+import { HorarioComponent } from './horario/horario.component';
+import { HorarioAgregarComponent } from './horario/horario-agregar/horario-agregar.component';
 
 @NgModule({
   exports: [
@@ -90,7 +92,8 @@ import { PacienteAgregarComponent } from './paciente/paciente-agregar/paciente-a
     MatTooltipModule,
     MatNativeDateModule
   ],
-  declarations: []
+  declarations: [  
+  ]
 })
 export class MaterialModule {}
 
@@ -123,7 +126,11 @@ export class MaterialModule {}
         SubcategoriaComponent,
         PacienteComponent,
         ServiciosComponent,
-        PacienteAgregarComponent
+        PacienteAgregarComponent,
+        HorarioComponent,
+        HorarioAgregarComponent
+
+
     ],
     providers : [
         MatNativeDateModule

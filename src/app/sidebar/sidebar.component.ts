@@ -58,6 +58,12 @@ export const ROUTES: RouteInfo[] = [{
         icontype: 'apps',
 
     },{
+        path: '/horario',
+        title: 'Horarios',
+        type: 'link',
+        icontype: 'apps',
+
+    },{
         path: '/forms',
         title: 'Forms',
         type: 'sub',

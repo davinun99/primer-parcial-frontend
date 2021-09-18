@@ -11,6 +11,10 @@ import { SubcategoriaComponent } from './subcategoria/subcategoria.component';
 import { PacienteComponent } from './paciente/paciente.component'
 import { PacienteAgregarComponent } from './paciente/paciente-agregar/paciente-agregar.component'
 import { ServiciosComponent } from './servicios/servicios.component';
+import { HorarioComponent } from './horario/horario.component';
+import { HorarioAgregarComponent } from './horario/horario-agregar/horario-agregar.component';
+
+
 export const AppRoutes: Routes = [
     {
       path: '',
@@ -88,6 +92,14 @@ export const AppRoutes: Routes = [
        {
          path: 'nuevopaciente',
          component: PacienteAgregarComponent
+       },
+       {
+         path: 'horario',
+         component: HorarioComponent
+       },
+       {
+         path: 'nuevohorario',
+         component: HorarioAgregarComponent
        }
       
        
