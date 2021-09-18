@@ -70,6 +70,12 @@ export const ROUTES: RouteInfo[] = [{
         icontype: 'apps',
 
     },{
+        path: '/fichaclinica',
+        title: 'Ficha Clinica',
+        type: 'link',
+        icontype: 'apps',
+
+    },{
         path: '/forms',
         title: 'Forms',
         type: 'sub',

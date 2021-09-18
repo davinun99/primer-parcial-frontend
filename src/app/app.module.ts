@@ -60,6 +60,7 @@ import { HorarioComponent } from './horario/horario.component';
 import { HorarioAgregarComponent } from './horario/horario-agregar/horario-agregar.component';
 import { HorarioexcComponent } from './horarioexc/horarioexc.component';
 import { HorariopComponent } from './horario/horariop.component';
+import { FichaClinicaComponent } from './ficha-clinica/ficha-clinica.component';
 
 
 @NgModule({
@@ -97,6 +98,8 @@ import { HorariopComponent } from './horario/horariop.component';
   ],
   declarations: [  
   
+  
+    
   ]
 })
 export class MaterialModule {}
@@ -135,6 +138,7 @@ export class MaterialModule {}
         HorarioAgregarComponent,
         HorarioexcComponent,
         HorariopComponent,
+        FichaClinicaComponent,
 
     ],
     providers : [
