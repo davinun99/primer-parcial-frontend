@@ -27,6 +27,16 @@ export const ROUTES: RouteInfo[] = [{
         type: 'link',
         icontype: 'dashboard'
     },{
+        path: '/categorias',
+        title: 'categoria',
+        type: 'link',
+        icontype: 'date_range'
+    },{
+        path: '/nuevacategorias',
+        title: 'Crear categoria',
+        type: 'link',
+        icontype: 'date_range'
+    },{
         path: '/components',
         title: 'Components',
         type: 'sub',
