@@ -1,11 +1,10 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { Horario } from '../model/horario';
-import { HorarioService } from '../service/horario.service';
-import { Paciente } from '../model/paciente';
+import { FichaClinicaService } from '../service/ficha-clinica.service';
 
 import { Subject } from 'rxjs';
+import fichaClinica from '../model/fichaClinica';
 
 declare interface DataTable {
   headerRow: string[];
@@ -21,64 +20,126 @@ declare const $: any;
   styleUrls: ['./ficha-clinica.component.css']
 })
 export class FichaClinicaComponent implements OnInit, AfterViewInit, OnDestroy {
-  horario: Horario[] = [];
-  paciente: Paciente = new Paciente();
-  idPersona: number = 0;
+  fechas={
+    fechaDesdeCadena:null,
+    fechaHastaCadena:null,
+  }
+  idPaciente:null;
+  idEmpleado:null;
+  idTipoProducto:null;
+
+  fichaClinica: fichaClinica[];
+  dtTrigger: Subject<any> = new Subject<any>();
   public dataTable: DataTable;
 
-  dias = ['Domingo','Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'];
+  constructor(private fichaClinicaService: FichaClinicaService,  private route: ActivatedRoute,private router: Router) 
+  {
 
-  dtTrigger: Subject<any> = new Subject<any>();
-
-
-  constructor(private horarioService: HorarioService,  private route: ActivatedRoute,private router: Router) {}
+  }
 
   ngOnInit(): void {
-    console.log("HOLA")
-    this.dataTable = {
-      headerRow: ['Dia','Hora de Apertura','Hora de Cierre','Intervalo','Empleado', 'Actions'],
-      footerRow: ['Dia','Hora de Apertura','Hora de Cierre','Intervalo','Empleado', 'Actions'],
-      dataRows: [],
-    };
+    this.fichaClinicaService.getFichaClinica().subscribe(
+      entity => {
+        this.fichaClinica = entity.lista
+      },
+      error =>console.log('no se pudieron conseguir las fichas clinicas')
+     );
+     
+      this.dataTable = {
+          headerRow: [ 'motivoConsulta', 'diagnostico','observacion','idEmpleado','idCliente','idTipoProducto','idCategoria' ],
+          footerRow: [ 'motivoConsulta', 'diagnostico','observacion','idEmpleado','idCliente','idTipoProducto','idCategoria' ],
 
-    this.route.queryParams.filter(params => params.idPersona).subscribe(params => {
-      this.idPersona = params.idPersona;
-    })
-    if( this.idPersona )
-    this.getHorariosPaciente();
+          dataRows: [
+          ]
+       };
+
   }
 
-  getHorariosPaciente(): void {
-    this.horarioService.getHorarioPaciente(this.idPersona).subscribe(entity=>{
-      this.horario=entity.lista;
+  getFichasClinicasEntreFechas(): void {
+    this.fichaClinicaService.getFichasClinicasEntreFechas(this.fechas.fechaDesdeCadena,this.fechas.fechaHastaCadena).subscribe(entity=>{
+      this.fichaClinica=entity.lista;
       this.dtTrigger.next();
-      console.log("HOLA")
+
     },error => {
-      console.log('No se obtuvieron horarios! ', error)
+      console.log('No se obtuvieron las fichas clinicas! ', error)
     });
-
-
-   
   }
+  getFichaClinicaPacienteId(): void {
+    this.fichaClinicaService.getFichaClinicaPacienteId(this.idPaciente).subscribe(entity=>{
+      this.fichaClinica=entity.lista;
+      this.dtTrigger.next();
 
-  ngAfterViewInit() {}
+    },error => {
+      console.log('No se obtuvieron las fichas clinicas! ', error)
+    });
+  }
+  getFichaClinicaFisioterapeutaId(): void {
+    this.fichaClinicaService.getFichaClinicaFisioterapeutaId(this.idEmpleado).subscribe(entity=>{
+      this.fichaClinica=entity.lista;
+      this.dtTrigger.next();
+
+    },error => {
+      console.log('No se obtuvieron las fichas clinicas! ', error)
+    });
+  }
+  getFichaClinicaSubCategoriaId(): void {
+    this.fichaClinicaService.getFichaClinicaSubCategoriaId(this.idTipoProducto).subscribe(entity=>{
+      this.fichaClinica=entity.lista;
+      this.dtTrigger.next();
+
+    },error => {
+      console.log('No se obtuvieron las fichas clinicas! ', error)
+    });
+  }
 
   ngOnDestroy(): void {
-    // Do not forget to unsubscribe the event
-    this.dtTrigger.unsubscribe();
   }
 
 
  
+  ngAfterViewInit() {
+    $('#datatables').DataTable({
+      "pagingType": "full_numbers",
+      "lengthMenu": [
+        [10, 25, 50, -1],
+        [10, 25, 50, "All"]
+      ],
+      responsive: true,
+      language: {
+        search: "_INPUT_",
+        searchPlaceholder: "Search records",
+      }
 
-  editar(p: Horario) {
-    throw new Error('No implementado');
-    // this.router.navigate(['/paciente/edit/', p.idPersona]);
+    });
+
+    const table = $('#datatables').DataTable();
+
+    // Edit record
+    table.on('click', '.edit', function(e) {
+      let $tr = $(this).closest('tr');
+      if ($($tr).hasClass('child')) {
+        $tr = $tr.prev('.parent');
+      }
+
+      var data = table.row($tr).data();
+      alert('You press on Row: ' + data[0] + ' ' + data[1] + ' ' + data[2] + '\'s row.');
+      e.preventDefault();
+    });
+
+    // Delete a record
+    table.on('click', '.remove', function(e) {
+      const $tr = $(this).closest('tr');
+      table.row($tr).remove().draw();
+      e.preventDefault();
+    });
+
+    //Like record
+    table.on('click', '.like', function(e) {
+      alert('You clicked on Like button');
+      e.preventDefault();
+    });
+
+    $('.card .material-datatables label').addClass('form-group');
   }
 
-  eliminar(e: Horario) {
-    throw new Error('No implementado');
-
-    
-  }
 }

@@ -35,7 +35,10 @@ export class FichaClinicaService {
     const registrosEntreObj: Object = {"idTipoProducto":{"idTipoProducto":idTipoProducto}};
     return this.http.get<listadatos<fichaClinica>>(`${this.api}/?ejemplo=${encodeURIComponent(JSON.stringify(registrosEntreObj))}`);
   }
-
+  getFichaClinica(): Observable<listadatos<fichaClinica>> {
+    return this.http.get<listadatos<fichaClinica>>(this.api);
+  }
+  
   
   agregarFichaClinica(data: fichaClinica): Observable<fichaClinica> {
       
