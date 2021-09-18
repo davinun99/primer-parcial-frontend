@@ -1,0 +1,59 @@
+<div class="main-content">
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="card ">
+            
+            <div class="card-body ">
+              <form method="#" action="#" >
+                <div class="row">
+                  <div class="col-sm-6">
+                    <mat-form-field class="example-full-width">
+                      <input matInput name="motivoConsulta" placeholder="motivoConsulta" type="text" [(ngModel)]="data.motivoConsulta">
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <mat-form-field class="example-full-width">
+                      <input matInput name="diagnostico" placeholder="diagnostico" type="text" [(ngModel)]="data.diagnostico">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-sm-6">
+                    <mat-form-field class="example-full-width">
+                      <input matInput name="observacion" placeholder="observacion" type="text" [(ngModel)]="data.observacion">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-sm-6">
+                    <mat-form-field class="example-full-width">
+                      <input matInput name="idEmpleado" placeholder="idEmpleado" type="number" [(ngModel)]="data.idEmpleado">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-sm-6">
+                    <mat-form-field class="example-full-width">
+                      <input matInput name="idCliente" placeholder="idCliente" type="number" [(ngModel)]="data.idCliente">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-sm-6">
+                    <mat-form-field class="example-full-width">
+                      <input matInput name="idTipoProducto" placeholder="idTipoProducto" type="number" [(ngModel)]="data.idTipoProducto">
+                    </mat-form-field>
+                  </div>
+                </div>
+               
+              </form>
+            </div>
+            <div class="card-footer ">
+              <div class="row">
+                <div class="col-md-12">
+
+                  <button mat-raised-button class="btn btn-fill btn-primary mx-2" (click)='agregarFichaClinica()' >Guardar</button>
+                  <button mat-raised-button class="btn btn-fill btn-secondary mx-2" [routerLink]="['/fichaclinica']">Cancelar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -32,8 +32,10 @@ export class FichaClinicaService {
     return this.http.get<listadatos<fichaClinica>>(`${this.api}/?ejemplo=${encodeURIComponent(JSON.stringify(registrosEntreObj))}`);
   }
   getFichaClinicaSubCategoriaId(idTipoProducto: number): Observable<listadatos<fichaClinica>> {
+    console.log(idTipoProducto);
     const registrosEntreObj: Object = {"idTipoProducto":{"idTipoProducto":idTipoProducto}};
-    return this.http.get<listadatos<fichaClinica>>(`${this.api}/?ejemplo=${encodeURIComponent(JSON.stringify(registrosEntreObj))}`);
+    console.log(`${this.api}?ejemplo=${encodeURIComponent(JSON.stringify(registrosEntreObj))}`);
+    return this.http.get<listadatos<fichaClinica>>(`${this.api}?ejemplo=${encodeURIComponent(JSON.stringify(registrosEntreObj))}`);
   }
   getFichaClinica(): Observable<listadatos<fichaClinica>> {
     return this.http.get<listadatos<fichaClinica>>(this.api);
@@ -41,8 +43,12 @@ export class FichaClinicaService {
   
   
   agregarFichaClinica(data: fichaClinica): Observable<fichaClinica> {
-      
-    return this.http.post<fichaClinica>(this.api, data).pipe(
+    let headers = new HttpHeaders({
+      'Content-Type':'application/json',
+      'usuario': 'usuario4'
+    });
+
+    return this.http.post<fichaClinica>(this.api, data,{ headers} ).pipe(
       tap(
         // Log the result or error
         (data) => console.log('agregado ' + data),
