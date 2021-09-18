@@ -36,7 +36,6 @@ export class HorariopComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(private horarioService: HorarioService,  private route: ActivatedRoute,private router: Router) {}
 
   ngOnInit(): void {
-    console.log("HOLA")
     this.dataTable = {
       headerRow: ['Dia','Hora de Apertura','Hora de Cierre','Intervalo','Empleado', 'Actions'],
       footerRow: ['Dia','Hora de Apertura','Hora de Cierre','Intervalo','Empleado', 'Actions'],
