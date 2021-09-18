@@ -18,6 +18,10 @@ export class HorarioService {
   constructor(private http: HttpClient) {}
 
   
+  getHorarioPaciente(id: number): Observable<listadatos<Horario>> {
+    const pacienteObj: Object = {"idEmpleado":{"idPersona": id}};  
+    return this.http.get<listadatos<Horario>>(`${this.api}/?ejemplo=${encodeURIComponent(JSON.stringify(pacienteObj))}`);
+  }
 
   getHorarios(): Observable<listadatos<Horario>> {
     return this.http.get<listadatos<Horario>>(this.api);

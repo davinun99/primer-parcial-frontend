@@ -58,6 +58,9 @@ import { ServiciosComponent } from './servicios/servicios.component';
 import { PacienteAgregarComponent } from './paciente/paciente-agregar/paciente-agregar.component';
 import { HorarioComponent } from './horario/horario.component';
 import { HorarioAgregarComponent } from './horario/horario-agregar/horario-agregar.component';
+import { HorarioexcComponent } from './horarioexc/horarioexc.component';
+import { HorariopComponent } from './horario/horariop.component';
+
 
 @NgModule({
   exports: [
@@ -93,6 +96,7 @@ import { HorarioAgregarComponent } from './horario/horario-agregar/horario-agreg
     MatNativeDateModule
   ],
   declarations: [  
+  
   ]
 })
 export class MaterialModule {}
@@ -128,8 +132,9 @@ export class MaterialModule {}
         ServiciosComponent,
         PacienteAgregarComponent,
         HorarioComponent,
-        HorarioAgregarComponent
-
+        HorarioAgregarComponent,
+        HorarioexcComponent,
+        HorariopComponent,
 
     ],
     providers : [

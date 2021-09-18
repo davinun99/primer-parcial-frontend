@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Paciente } from '../model/paciente';
 import { PacienteService } from '../service/paciente.service';
+import { Router } from '@angular/router';
 
 declare interface DataTable {
   headerRow: string[];
@@ -18,7 +19,7 @@ export class PacienteComponent implements OnInit {
   public dataTable: DataTable;
   pacientes: Paciente[]=[];
 
-  constructor(private servicioPaciente: PacienteService) { }
+  constructor(private servicioPaciente: PacienteService, private router: Router) { }
 
   ngOnInit(): void {
     this.servicioPaciente.getPacientes().subscribe(
@@ -35,6 +36,13 @@ export class PacienteComponent implements OnInit {
 
   }
   
+  edit(p: Paciente) {
+    this.router.navigate(['/paciente/edit/', p.idPersona]);
+  }
+  horario(p: Paciente) {
+    console.log("HOLA", p);
+    this.router.navigate(['/horario', p.idPersona]);
+  }
 
 }
 

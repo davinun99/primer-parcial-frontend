@@ -67,13 +67,15 @@
                                           class="btn btn-link btn-info btn-just-icon like"
                                           ><i class="material-icons">favorite</i></a
                                         > -->
+                                        <a [routerLink]="['/horariop']" 
+                                        [queryParams]="{idPersona: p.idPersona}" >Horarios</a>
                                         <a
-                                          (click)="edit(paciente)"
+                                          (click)="edit(p)"
                                           class="btn btn-link btn-warning btn-just-icon edit"
                                           ><i class="material-icons">edit</i></a
                                         >
                                         <a
-                                          (click)="close(paciente)"
+                                          (click)="close(p)"
                                           class="btn btn-link btn-danger btn-just-icon remove"
                                           ><i class="material-icons">close</i></a
                                         >
