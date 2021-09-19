@@ -62,6 +62,7 @@ import { HorarioexcComponent } from './horarioexc/horarioexc.component';
 import { HorariopComponent } from './horario/horariop.component';
 import { FichaClinicaComponent } from './ficha-clinica/ficha-clinica.component';
 import { FichaClinicaAgregarComponent } from './ficha-clinica/ficha-clinica-agregar/ficha-clinica-agregar.component';
+import { HorarioexcAgregarComponent } from './horarioexc/horarioexc-agregar/horarioexc-agregar.component';
 
 
 @NgModule({
@@ -97,14 +98,7 @@ import { FichaClinicaAgregarComponent } from './ficha-clinica/ficha-clinica-agre
     MatTooltipModule,
     MatNativeDateModule
   ],
-  declarations: [  
-  
-  
-    
-  
-    
-
-  ]
+  declarations: [ ]
 })
 export class MaterialModule {}
 
@@ -144,6 +138,8 @@ export class MaterialModule {}
         HorariopComponent,
         FichaClinicaComponent,
         FichaClinicaAgregarComponent,
+        HorarioexcAgregarComponent
+ 
 
     ],
     providers : [

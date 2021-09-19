@@ -17,6 +17,8 @@ import { HorarioexcComponent } from './horarioexc/horarioexc.component';
 import { HorariopComponent } from './horario/horariop.component';
 import { FichaClinicaComponent } from './ficha-clinica/ficha-clinica.component';
 import { FichaClinicaAgregarComponent } from './ficha-clinica/ficha-clinica-agregar/ficha-clinica-agregar.component';
+import { HorarioexcAgregarComponent } from './horarioexc/horarioexc-agregar/horarioexc-agregar.component';
+
 
 export const AppRoutes: Routes = [
     {
@@ -108,7 +110,12 @@ export const AppRoutes: Routes = [
        {
          path: 'horarioexc',
          component: HorarioexcComponent
-       },{
+       },
+       {
+         path: 'nuevohorarioexc',
+         component: HorarioexcAgregarComponent
+       }
+       ,{
         path: 'horariop',
         component: HorariopComponent,
       },{
