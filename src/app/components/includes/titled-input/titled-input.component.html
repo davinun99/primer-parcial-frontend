@@ -1,0 +1,7 @@
+<div class="p-10 column border-1 m-v-5 br-4">
+    <label class="fs-12 text-grey-8">{{title}}</label>
+    <input [type]="type" class="p-v-5 nb"
+        [ngModel]="ngModel"
+        (ngModelChange)="ngModelChange.emit($event)"
+    >
+</div>

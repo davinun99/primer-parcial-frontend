@@ -1,0 +1,15 @@
+<div class="row">
+
+    <!-- LIST -->
+
+    <div style="max-height:280px" class="over-auto row wrap">
+        <div *ngFor="let subCategory of subCategories" >
+            <div *ngIf="subCategory.categoryId === category.id"
+                class="p-5 mr-5 m-v-2 br-4 text-grey-5 border justify-between"
+            >
+                <p>{{subCategory.name}}</p>
+            </div>
+        </div>
+    </div>
+
+</div>

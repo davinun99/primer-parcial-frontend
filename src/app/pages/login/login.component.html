@@ -1,0 +1,46 @@
+<style>
+.full-item {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+}
+.login-container {
+    max-width:min(400px, 85vw);
+    margin: 0 10px;
+}
+</style>
+
+<div class="center full-vh bg-primary">
+    <div class="column center p-40 br-4 b-1 shadow-2 bg-white login-container">
+
+        <div class="text-grey-7 fs-20 mb-10">Iniciar Sesión</div>
+
+        <!-- INPUTS -->
+        <titled-input
+            ngDefaultControl
+            [(ngModel)]="username" 
+            title='Nombre de usuario'>
+        </titled-input>
+        <titled-input
+            ngDefaultControl
+            [(ngModel)]="password" 
+            title="Contraseña"
+            type="password">
+        </titled-input>
+
+        <!-- ERROR MESSAGE -->
+
+        <div *ngIf="!!errorMessage" class="bg-red p-5 br-4 text-white">
+            {{errorMessage}}
+        </div>
+
+        <!-- SEND LOGIN -->
+
+        <div class="row center m-v-10">
+            <button (click)="login()" class="full-item text-white bg-primary br-4">
+                <strong>INICIAR SESIÓN</strong>
+            </button>
+        </div>
+    </div>
+
+</div>

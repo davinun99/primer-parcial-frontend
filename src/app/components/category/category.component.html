@@ -1,0 +1,125 @@
+<style>
+.new-category-modal-container {
+    z-index: 100;
+    position: absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background-color:#0008;
+}
+.new-category-modal {
+    position: relative;
+    background-color:white;
+    margin: 10px;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+}
+.category-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left:0;
+}
+.category-container-background {
+    z-index: 70;
+    position: absolute;
+    top: 0;
+    left:0;
+    right: 0;
+    bottom: 0;
+    background-color: #0004;
+}
+@media screen and (min-width: 480px) {
+    .category-container {
+        margin:0;
+    }
+    
+}
+</style>
+
+<full-page-modal 
+    title="Categorías"
+    btnAddText="Nueva categoría"
+    (added)="showAddModal=true"
+    (back)="back.emit()"
+>
+
+    <!-- LIST -->
+
+    <div *ngIf="categories && categories.length > 0">
+        <div *ngFor="let category of categories; index as i">
+            <div class="p-15 bb justify-between column"
+                [ngClass]="i % 2 === 0 ? 'bg-grey-f8' : 'bg-white'"
+            >
+                <!-- CATEGORY ITEM -->
+
+                <div class="row justify-between items-center">
+                    <!-- CATEGORY NAME -->
+
+                    <div class="mb-10">
+                        <strong>{{category.name}}</strong>
+                    </div>
+
+                    <!-- ADD SUB CATEGORY BUTTON -->
+                    
+                    <button (click)="showAddSubCategoryModal=true;selectedCategory=category">
+                        <div class="row no-wrap items-center">
+                            <i class="fas fa-plus fs-12"></i>
+                            <div class="m-h-5 fs-12">Sub</div>
+                            <div class="fs-12">categoría</div>
+                        </div>
+                    </button>
+                </div>
+
+                <!-- SUB CATEGORY LIST -->
+
+                <sub-category-list 
+                    [subCategories]="subCategories"
+                    [category]="category">
+                </sub-category-list>
+            </div>
+        </div>
+    </div>
+
+    <!-- NEW CATEGORY MODAL -->
+
+    <back-modal 
+        ngDefaultControl
+        title="Nueva categoría"
+        [(ngModel)]="showAddModal"
+        [canConfirm]="!!newCategoryName"
+        (confirmed)="createCategory()"
+    >
+        <titled-input 
+            ngDefaultControl 
+            title="Descripción" 
+            [(ngModel)]="newCategoryName">
+        </titled-input>
+    </back-modal>
+
+    <!-- ADD SUB CATEGORY MODAL -->
+
+    <back-modal 
+        ngDefaultControl
+        title="Nueva sub categoría"
+        [(ngModel)]="showAddSubCategoryModal"
+        [canConfirm]="!!newSubCategoryName"
+        (confirmed)="createSubCategory()"
+    >
+        <div *ngIf="!!selectedCategory" 
+            class="border-1 p-10 br-4"
+        >
+            <div class="text-grey-7 fs-12">Categoría</div>
+            <div class="mt-5">{{selectedCategory.name}}</div>
+        </div>
+        <titled-input 
+            ngDefaultControl 
+            title="Descripción" 
+            [(ngModel)]="newSubCategoryName">
+        </titled-input>
+    </back-modal>
+        
+        
+</full-page-modal>

@@ -1,0 +1,23 @@
+<style>
+.toolbar {
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    min-height:50px;
+    max-height:50px;
+    padding: 0 10px;
+    color: white;
+}
+</style>
+
+<!-- TOOL BAR -->
+<div class="toolbar bg-primary row items-center justify-between">
+    <div class="no-wrap"><div class="mr-5">Hola!</div><strong>{{username}}</strong></div>
+    <button (click)="logout()" class="bg-primary text-white underline p-5">Cerrar sesión</button>
+</div>
+
+<!-- CONTENT -->
+<div style="margin-top:50px">
+    <ng-content></ng-content>
+</div>
