@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { mainEndpoint } from './utils';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServiceService {
 
-  private urlApiService = 'http://181.123.243.5:8080/stock-pwfe/presentacionProducto';
-  private urlApiProduct = 'http://181.123.243.5:8080/stock-pwfe/producto';
+  private urlApiService = mainEndpoint + '/stock-pwfe/presentacionProducto';
+  private urlApiProduct = mainEndpoint + '/stock-pwfe/producto';
   public services: Array<any> = [];
   public products: Array<any> = [];
 

@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { mainEndpoint } from './utils';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
-  private urlApiCategory = 'http://181.123.243.5:8080/stock-pwfe/categoria';
-  private urlApiSubCategory = 'http://181.123.243.5:8080/stock-pwfe/tipoProducto';
+  private urlApiCategory = mainEndpoint + '/stock-pwfe/categoria';
+  private urlApiSubCategory = mainEndpoint + '/stock-pwfe/tipoProducto';
   public categories: Array<any> = [];
   public subCategories: Array<any> = [];
 

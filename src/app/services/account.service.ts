@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
+import {mainEndpoint} from './utils';
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
-  private urlApi = 'http://181.123.243.5:8080/stock-pwfe/persona';
+  private urlApi = mainEndpoint + '/stock-pwfe/persona';
   public isLogged: boolean = true;
   public user: any = { usuarioLogin: 'usuario1' };
 

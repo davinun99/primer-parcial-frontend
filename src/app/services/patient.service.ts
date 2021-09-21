@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { mainEndpoint } from './utils';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PatientService {
 
-  private urlApiPatient = 'http://181.123.243.5:8080/stock-pwfe/persona';
+  private urlApiPatient = mainEndpoint + '/stock-pwfe/persona';
   public patients: Array<any> = [];
 
   constructor(private _http: HttpClient) { }
