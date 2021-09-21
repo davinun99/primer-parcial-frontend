@@ -1,0 +1,1 @@
+export const mainEndpoint  = 'http://181.123.243.5:8080';
