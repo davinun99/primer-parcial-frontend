@@ -1,0 +1,81 @@
+<full-page-modal 
+    title="Servicios"
+    btnAddText="Nuevo servicio"
+    (added)="showAddModal=true;clearSelectedService()"
+    (back)="back.emit()"
+>
+
+    <div *ngFor="let service of services; index as i">
+        <div class="p-15 bb justify-between column" 
+            [ngClass]="i % 2 === 0 ? 'bg-grey-f8' : 'bg-white'"
+        >
+            <!-- SERVICE ITEM -->
+    
+            <div class="row justify-between items-center">
+                <!-- SERVICE INFO NAME -->
+
+                <div class="column">
+                    <div class="text-grey-5 fs-12">{{service.code}}</div>
+                    <div class="m-v-5"><strong>{{service.name}}</strong></div>
+                    <div class="text-grey-5 fs-12">Precio: {{service.price}}</div>
+                </div>
+    
+                <!-- EDIT SERVICE -->
+    
+                <button (click)="showEditEditModal(service)">
+                    <div class="row no-wrap items-center">
+                        <i class="fas fa-edit fs-12"></i>
+                        <div class="m-h-5 fs-12 underline">Editar</div>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- NEW SERVICE MODAL -->
+
+    <back-modal 
+        ngDefaultControl
+        [title]="editingModal?'Modificar servicio '+selectedService.id:'Nuevo servicio'"
+        [(ngModel)]="showAddModal"
+        [canConfirm]="isValidSelectedService"
+        [confirmButtonText]="editingModal?'Modificar':'Crear'"
+        (confirmed)="confirmAction()"
+    >
+        <!-- NEW SERVICE CODE -->
+        <titled-input 
+            ngDefaultControl 
+            title="Código" 
+            [(ngModel)]="selectedService.code">
+        </titled-input>
+        <!-- NEW SERVICE NAME -->
+        <titled-input 
+            ngDefaultControl 
+            title="Nombre" 
+            [(ngModel)]="selectedService.name">
+        </titled-input>
+        <!-- NEW SERVICE PRICE -->
+        <titled-input 
+            ngDefaultControl 
+            title="Precio"
+            type="number"
+            [(ngModel)]="selectedService.price">
+        </titled-input>
+        <!-- PRODUCT LIST (SELECTOR) -->
+        <div class="p-v-10 column" style="max-height:200px;overflow:auto">
+            <div class="text-grey-7 fs-12 mb-15 p-h-5">
+                Seleccionar producto
+            </div>
+            <!-- PRODUCT LIST ITEMS -->
+            <button *ngFor="let product of products" 
+                class="p-10 border-1 br-4 mb-5 text-left row justify-between"
+                [ngClass]="selectedService.product===product?'bg-grey-e':''"
+                (click)="selectedService.product=product"
+            >
+                <div>{{product.id}} - {{product.name}}</div>
+                <i *ngIf="selectedService.product===product" class="fas fa-check"></i>
+            </button>
+        </div>
+    </back-modal>
+
+</full-page-modal>

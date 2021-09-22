@@ -1,0 +1,46 @@
+<style>
+.container-background {
+    z-index: 70;
+    position: absolute;
+    top: 0;
+    left:0;
+    right: 0;
+    bottom: 0;
+    background-color: #0004;
+}
+.container {
+    min-width: min(100vw, 400px);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left:0;
+    max-width: 600px;
+}
+</style>
+
+<div class="container-background">
+    <div class="bg-white container">
+
+        <!-- HEADER -->
+
+        <div class="row justify-between p-10 items-center bb">
+            <div class="text-grey-8 fs-18 mr-10">
+                <button (click)="back.emit()" class="p-v-10 pl-10 pr-20">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <strong class="fs-16">{{title}}</strong>
+            </div>
+            <button *ngIf="!!btnAddText" (click)="added.emit()" 
+                class="p-10 bg-primary text-white br-4"
+            >
+                <strong>{{btnAddText}}</strong>
+            </button>
+        </div>
+
+        <!-- CONTENT -->
+
+        <div style="max-height:calc(100vh - 60px)" class="over-auto">
+            <ng-content></ng-content>
+        </div>
+    </div>
+</div>

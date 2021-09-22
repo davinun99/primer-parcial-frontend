@@ -1,0 +1,86 @@
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+
+<full-page-modal title="Doctores" btnAddText="Nuevo doctor" (added)="showNewClientModal()" (back)="back.emit()">
+    <div *ngFor="let doctor of doctors" class="bb p-15 column">
+        <div class="row justify-between">
+            <!-- PERSONAL INFO -->
+            <div>
+                <div *ngIf="doctor.document" class="text-grey-5 fs-12">CI/RUC {{doctor.document}}</div>
+                <div class="m-v-5"><strong>{{doctor.fullName}}</strong></div>
+                <!--<div class="text-grey-5">{{doctor.email}}</div>
+                <div class="text-grey-5">{{doctor.phone}}</div>-->
+            </div>
+            <!-- EDIT BUTTON -->
+            <div>
+                <button class="row p-5 text-grey-5" (click)="showEditModal(doctor)">
+                    <i class="fas fa-user-edit"></i>
+                    <div class="ml-5 underline">Editar</div>
+                </button>
+            </div>
+        </div>
+        <!-- CALENDAR -->
+        <!--<div class="mt-10 mb-5 text-grey-2">Calendario</div>-->
+        <table class="table" class="mt-10">
+            <tr>
+                <th>Día</th>
+                <th>Hora de iniciio</th>
+                <th>Hora de fin</th>
+            </tr>
+            <tr *ngFor="let calendar of doctor.calendars">
+                <td>{{getDayFromNumber(calendar.day)}}</td>
+                <td>{{calendar.startHour}}</td>
+                <td>{{calendar.endHour}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <back-modal 
+        ngDefaultControl 
+        [title]="editingModal?'Modificar doctor '+selectedDoctor.id:'Nuevo doctor'"
+        [(ngModel)]="showAddModal" 
+        [canConfirm]="isValidSelectedDoctor"
+        [confirmButtonText]="editingModal?'Modificar':'Crear'"
+        (confirmed)="editingModal?editDoctor():createDoctor()">
+        <!-- NAME INPUT -->
+        <titled-input 
+            ngDefaultControl 
+            title="Nombre" 
+            [(ngModel)]="selectedDoctor.name">
+        </titled-input>
+        <!-- LAST NAME INPUT -->
+        <titled-input ngDefaultControl title="Apellido" [(ngModel)]="selectedDoctor.lastName">
+        </titled-input>
+        <!-- EMAIL INPUT -->
+        <titled-input ngDefaultControl title="Email" [(ngModel)]="selectedDoctor.email">
+        </titled-input>
+        <!-- PHONE INPUT -->
+        <titled-input ngDefaultControl title="Celular" [(ngModel)]="selectedDoctor.phone">
+        </titled-input>
+        <!-- DOCUMENT INPUT -->
+        <titled-input ngDefaultControl title="CI/RUC" [(ngModel)]="selectedDoctor.document">
+        </titled-input>
+        <!-- BIRTHDAY INPUT -->
+        <titled-input ngDefaultControl title="Fecha de nacimiento" type="date" [(ngModel)]="selectedDoctor.birthday">
+        </titled-input>
+        <!-- TYPE INPUT -->
+        <titled-input ngDefaultControl title="Tipo de persona" [(ngModel)]="selectedDoctor.type">
+        </titled-input>
+
+    </back-modal>
+
+</full-page-modal>

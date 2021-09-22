@@ -1,0 +1,50 @@
+<style>
+    .modal-container {
+        z-index: 100;
+        position: absolute;
+        padding: 10px;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: calc(100vw - 20px);
+        background-color: #0008;
+    }
+
+    .modal {
+        position: relative;
+        background-color: white;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+</style>
+
+<div *ngIf="ngModel" class="modal-container">
+    <div class="modal br-4" style="max-width:400px;">
+
+        <!-- MODAL HEADER -->
+
+        <div class="text-grey-5 fs-16 row items-center p-20 bb">
+            {{title}}
+        </div>
+
+        <!-- MODAL BODY -->
+
+        <div class="p-20">
+            <ng-content></ng-content>
+
+            <!-- FOOTER -->
+
+            <div class="row mt-15 justify-between">
+                <button class="p-10 text-grey-7 br-4" (click)="ngModelChange.emit(false)">
+                    <div>Cancelar</div>
+                </button>
+                <button class="p-10 text-white br-4" [ngClass]="[!!canConfirm ? 'bg-primary' : 'bg-grey-8']"
+                    (click)="confirm()">
+                    <div class="p-h-20">{{confirmButtonText}}</div>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
