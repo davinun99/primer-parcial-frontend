@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {mainEndpoint} from './utils';
+import { mainEndpoint, getFechaForQuery } from './utils';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,26 +15,20 @@ export class ReservationService {
   
   };
   constructor(private _http: HttpClient) { }
-  getFechaForQuery(fecha: Date){
-    const month = (fecha.getMonth() + 1).toLocaleString(undefined, {minimumIntegerDigits: 2});
-    const date = (fecha.getDate() + 1).toLocaleString(undefined, {minimumIntegerDigits: 2});
-    const fechaQuery:string = fecha.getFullYear() + month + date;
-    return fechaQuery;
-  }
   public async getCompleteAgenda(idFisioterapeuta: number, fecha: Date): Promise<any[]> {
-    const urlApi:string = `${this.urlApiPersona}/${idFisioterapeuta}/agenda?fecha=${this.getFechaForQuery(fecha)}`;
+    const urlApi:string = `${this.urlApiPersona}/${idFisioterapeuta}/agenda?fecha=${getFechaForQuery(fecha)}`;
     const { lista } = await this._http.get<any>(urlApi).toPromise();
     return lista;
   }
 
   public async getFreeAgenda(idFisioterapeuta: number, fecha: Date): Promise<any[]> {
-    const urlApi:string = `${this.urlApiPersona}/${idFisioterapeuta}/agenda?fecha=${this.getFechaForQuery(fecha)}&disponible=S`;
+    const urlApi:string = `${this.urlApiPersona}/${idFisioterapeuta}/agenda?fecha=${getFechaForQuery(fecha)}&disponible=S`;
     const { lista } = await this._http.get<any>(urlApi).toPromise();
     return lista;
   }
   public async getBusyAgenda(idFisioterapeuta: number, fechaDesde: Date, fechaHasta: Date): Promise<any[]> {
-    const fechaDesdeCadena: string = this.getFechaForQuery(fechaDesde);
-    const fechaHastaCadena: string = this.getFechaForQuery(fechaHasta);
+    const fechaDesdeCadena: string = getFechaForQuery(fechaDesde);
+    const fechaHastaCadena: string = getFechaForQuery(fechaHasta);
     const requestObj:Object = {
       idEmpleado:{
         idPersona:idFisioterapeuta
