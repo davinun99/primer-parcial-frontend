@@ -15,10 +15,18 @@ export class ReservationService {
   
   };
   constructor(private _http: HttpClient) { }
-  public async getCompleteAgenda(idFisioterapeuta: number, fecha: Date): Promise<any[]> {
-    const urlApi:string = `${this.urlApiPersona}/${idFisioterapeuta}/agenda?fecha=${getFechaForQuery(fecha)}`;
-    const { lista } = await this._http.get<any>(urlApi).toPromise();
-    return lista;
+  mapReservations = (reservation:any) => ({
+    ...reservation, 
+    fecha:  new Date(reservation.fecha).toLocaleDateString(),
+    horaInicio: reservation.horaInicio.length <= 9 ? reservation.horaInicio.substr(0,5): reservation.horaInicio.substr(11,5),
+    horaFin: reservation.horaFin.length <= 9 ? reservation.horaFin.substr(0,5): reservation.horaFin.substr(11,5),
+    flagAsistio: reservation.flagAsistio ? 'Si' : 'No',
+  });
+  public async getCompleteAgenda(idFisioterapeuta: number, fecha: string): Promise<any[]> {
+    const urlApi:string = `${this.urlApiPersona}/${idFisioterapeuta}/agenda?fecha=${fecha}`;
+    let obj:any = await this._http.get<any>(urlApi).toPromise();
+    obj = obj.map(this.mapReservations);
+    return obj;
   }
 
   public async getFreeAgenda(idFisioterapeuta: number, fecha: Date): Promise<any[]> {
