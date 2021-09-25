@@ -7,7 +7,10 @@
     .reservasContent{
         padding: 0 2rem;
     }
-
+    .tableContainer{
+        width: 100vw;
+        overflow-x: scroll;
+    }
     table {
         border-collapse: collapse;
         width: 100%;
@@ -31,8 +34,11 @@
             Dr. {{doctor.nombre}}  {{doctor.apellido}} 
         </option>
     </select><br/><br/>
-    Fecha: <input ngDefaultControl type="date" [(ngModel)]="fechaReserva"/><br/><br/>
+    Fecha desde: <input ngDefaultControl type="date" [(ngModel)]="fechaDesdeReserva"/><br/><br/>
+    <!-- Fecha hasta: <input ngDefaultControl type="date" [(ngModel)]="fechaHastaReserva"/><br/><br/> -->
     <button (click)="getDoctorAgenda()" class="p-10 text-white br-4 bg-primary">Ver disponibilidad</button>
+</main>
+<section class="reservasContent tableContainer">
     <table class="table" class="mt-10">
         <tr>
             <th>Día</th>
@@ -40,6 +46,8 @@
             <th>Hora de fin</th>
             <th>Observacion</th>
             <th>Asistio</th>
+            <th>Esta reservado</th>
+            <th></th>
         </tr>
         <tr *ngFor="let reservation of reservations">
             <td>{{reservation.fecha}}</td>
@@ -47,6 +55,21 @@
             <td>{{reservation.horaFin}}</td>
             <td>{{reservation.observacion}}</td>
             <td>{{reservation.flagAsistio}}</td>
+            <td>{{reservation.flagReserva}}</td>
+            <td *ngIf=" reservation.flagReserva === 'No'; else reservedClientInfo ">
+                <select [(ngModel)]="selectedPatientId">
+                    <option *ngFor="let patient of patients" [value]="patient.id">
+                        {{patient.fullName}}
+                    </option>
+                </select>
+                <button class="p-10 text-white br-4 bg-primary" (click)="reservate(reservation)">Reservar</button>
+            </td>
+            <ng-template #reservedClientInfo>
+                <td>
+                    {{reservation.idCliente.nombreCompleto}}
+                    <button class="p-10 text-white br-4 bg-red" (click)="deleteReservation(reservation.idReserva)">Cancelar reserva</button>
+                </td>
+            </ng-template>
         </tr>
     </table>
-</main>
+</section>
