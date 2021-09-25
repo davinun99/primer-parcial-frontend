@@ -15,6 +15,7 @@ export class ReservationService {
   
   };
   constructor(private _http: HttpClient) { }
+  
   mapReservations = (reservation:any) => ({
     ...reservation, 
     fecha:  new Date(reservation.fecha).toLocaleDateString(),
