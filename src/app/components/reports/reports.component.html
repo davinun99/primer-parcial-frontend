@@ -13,6 +13,20 @@
   tr:nth-child(even) {
       background-color: #dddddd;
   }
+  input[type=text]  {
+  width: 10%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  background-color: #F9F9F9;
+}
+  input[type=number]  {
+  width: 10%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  background-color: #F9F9F9;
+}
 </style>
 
 
@@ -23,13 +37,36 @@
     <div class="container" style="width: 700px;">
       <br><div>
         <button class="p-10 text-white br-4 bg-primary" (click)="downloadPDF()">Download PDF</button>
+        <button class="p-10 text-white br-4 bg-primary" style="right: auto;" (click)="downloadExcel()">Download Excel</button>
       </div><br>
       Fecha desde: <input ngDefaultControl type="date" [(ngModel)]="fechaDesde"/>
       Fecha hasta: <input ngDefaultControl type="date" [(ngModel)]="fechaHasta"/>
       <button class="p-10 text-white br-4 bg-primary" (click)="getServiceFromTo()">Filtrar por fecha</button>
       <br/><br/>
 
-        <div class="row">
+      <div class="col-5">
+        ID Paciente: <input
+          ngDefaultControl 
+          title="Ingrese el id del paciente" 
+          type="text"
+          [(ngModel)]="idPatient"/>
+        <button class="p-10 text-white br-4 bg-primary" (click)="getServiceByPatientId()">Filtrar por id Paciente</button>
+      </div>
+      
+      <br>
+      <div class="col-5">
+        ID Fisioterapeuta: <input 
+        class="form-control"
+        type="number" 
+        title="Ingrese el id del fisioterapeuta" 
+        [(ngModel)]="idFisioterapeuta" />
+        <button class="p-10 text-white br-4 bg-primary" (click)="getServiceByFisioId()">Filtrar por id de Fisioterapeuta</button>
+      </div>
+      
+      <br>
+
+
+      <div class="row">
           <div id="htmlData">
 
 
@@ -45,9 +82,10 @@
               </tr>-->
           
               <tr *ngFor="let service of services">
+                <td>id: {{service.idServicio}}</td>
                 <td>{{service.fechaHora}}</td>
-                <td>{{service.idEmpleado.nombre}} {{service.idEmpleado.apellido}}</td>
-                <td>{{service.idFichaClinica.idCliente.nombre}} {{service.idFichaClinica.idCliente.apellido}}</td>
+                <td>{{service.idEmpleado.idPersona}} - {{service.idEmpleado.nombre}} {{service.idEmpleado.apellido}}</td>
+                <td>{{service.idFichaClinica.idCliente.idPersona}} - {{service.idFichaClinica.idCliente.nombre}} {{service.idFichaClinica.idCliente.apellido}}</td>
                 <td>{{service.presupuesto}}</td>
                 <td>{{service.idFichaClinica.idTipoProducto.idCategoria.descripcion}} </td>
             </tr>

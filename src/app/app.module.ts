@@ -30,6 +30,10 @@ import { PatientComponent } from './components/patient/patient.component';
 import { DoctorComponent } from './components/doctor/doctor.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { ReportService } from './services/reports.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+//import { MatTableModule } from '@angular/material/table/table-module';
+import { MatTableModule } from '@angular/material/table';
+import { MatTableExporterModule } from 'mat-table-exporter';
 
 @NgModule({
   declarations: [
@@ -49,6 +53,7 @@ import { ReportService } from './services/reports.service';
     PatientComponent,
     DoctorComponent,
     ReportsComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -56,6 +61,10 @@ import { ReportService } from './services/reports.service';
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
+    MatTableModule, 
+    MatTableExporterModule,
+    
   ],
   providers: [
     AccountService,
@@ -67,4 +76,5 @@ import { ReportService } from './services/reports.service';
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

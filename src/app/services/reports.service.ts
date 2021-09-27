@@ -21,7 +21,7 @@ export class ReportService {
     return lista;
   }
 
-  public async getServiceByPatientId(idPatient: number): Promise<any[]> {
+  public async getServiceByPatientId(idPatient: string): Promise<any[]> {
     const requestObj =  {"idFichaClinica":{"idCliente":{"idPersona":idPatient}}};
     
     const urlApi:string = `${this.api}?ejemplo=${encodeURIComponent(JSON.stringify(requestObj))}`;
@@ -29,7 +29,7 @@ export class ReportService {
     return lista;
   }
   
-  public async getServiceByFisioId(idFisioterapeuta: number): Promise<any[]> {
+  public async getServiceByFisioId(idFisioterapeuta: string): Promise<any[]> {
     const requestObj =  {"idEmpleado":{"idPersona":idFisioterapeuta}};
     
     const urlApi:string = `${this.api}?ejemplo=${encodeURIComponent(JSON.stringify(requestObj))}`;
