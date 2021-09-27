@@ -1,0 +1,51 @@
+<style>
+  table {
+      border-collapse: collapse;
+      width: 100%;
+  }
+
+  td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+  }
+
+  tr:nth-child(even) {
+      background-color: #dddddd;
+  }
+</style>
+
+
+
+<full-page-modal title="Reportes" (back)="back.emit()">
+
+
+    <div class="container">
+        <div class="row">
+          <div id="htmlData">
+
+            <table class="table table-bordered mt-4">
+              <tr class="table-primary">
+                <th>Fecha del servicio</th>
+                <th>Fisioterapeuta</th>
+                <th>Paciente</th>
+                <th>Presupuesto</th>
+                <th>Subcategoría</th>
+              </tr>
+              <tr *ngFor="let service of services">
+                <th>{{service.fechaHora}}</th>
+                <td>{{service.idEmpleado.nombre}} {{service.idEmpleado.apellido}}</td>
+                <td>{{service.idFichaClinica.idCliente.nombre}} {{service.idFichaClinica.idCliente.apellido}}</td>
+                <td>{{service.presupuesto}}</td>
+                <td>{{service.idFichaClinica.idTipoProducto.idCategoria.descripcion}} </td>
+            </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      
+      
+      <div>
+        <button class="btn col col-lg-4 btn-danger btn-block ml-4" (click)="downloadPDF()">Download PDF</button>
+      </div>
+</full-page-modal>

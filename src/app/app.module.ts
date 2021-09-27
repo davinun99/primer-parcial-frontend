@@ -28,6 +28,7 @@ import { FullPageModalComponent } from './components/includes/full-page-modal/fu
 import { PatientComponent } from './components/patient/patient.component';
 import { DoctorComponent } from './components/doctor/doctor.component';
 import { ReportsComponent } from './components/reports/reports.component';
+import { ReportService } from './services/reports.service';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { ReportsComponent } from './components/reports/reports.component';
     ServiceService,
     PatientService,
     DoctorService,
+    ReportService
   ],
   bootstrap: [AppComponent]
 })

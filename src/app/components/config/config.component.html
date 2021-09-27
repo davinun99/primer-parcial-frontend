@@ -44,6 +44,12 @@
     *ngIf="tab === 'personal'" 
     (back)="tab=''">
 </doctor-list>
+<!-- REPORTS LIST -->
+
+<app-reports
+    *ngIf="tab === 'report'" 
+    (back)="tab=''">
+</app-reports>
 
 <!-- TITLE -->
 
@@ -83,7 +89,10 @@
         Horario de excepción de fisioteraputas
     </button>
     <button class="tab-item" (click)="tab='report'">
-        Reportes
+        <div>
+            <div><strong>Reportes</strong></div>
+            <p class="mt-10 text-grey-5 fs-13">Reporte de servicios</p>
+        </div>
     </button>
 
 </div>
