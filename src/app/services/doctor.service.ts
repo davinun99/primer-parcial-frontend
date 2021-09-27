@@ -8,6 +8,7 @@ import { mainEndpoint } from './utils';
 export class DoctorService {
 
   private urlApiDoctor = mainEndpoint + '/stock-pwfe/personaHorarioAgenda';
+  private urlApiFisios = mainEndpoint + '/stock-pwfe/persona';
   public doctors: Array<any> = [];
 
   constructor(private _http: HttpClient) { }
@@ -47,7 +48,14 @@ export class DoctorService {
       fechaNacimiento: p.birthday + ' 00:00:01.1'
     }
   }
-
+  public async getAllFisios(): Promise<any[]>{
+    const requestObj: Object = {
+      soloUsuariosDelSistema: true
+    };
+    const url:string = `${this.urlApiFisios}?ejemplo=${encodeURIComponent(JSON.stringify(requestObj))}`;
+    const {lista} = await this._http.get<any>(url).toPromise();
+    return lista;
+  }
   public async getAllDoctors(): Promise<any[]> {
     const { lista } = await this._http.get<any>(this.urlApiDoctor).toPromise();
     let newDoctors = lista

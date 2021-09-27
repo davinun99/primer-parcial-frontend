@@ -18,6 +18,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { MainComponent } from './layouts/main/main.component';
 import { RecordComponent } from './components/record/record.component';
+import {ReservationComponent} from './components/reservation/reservation.component';
 import { CategoryComponent } from './components/category/category.component';
 import { TitledInputComponent } from './components/includes/titled-input/titled-input.component';
 import { SubCategoryComponent } from './components/sub-category/sub-category.component';
@@ -37,6 +38,7 @@ import { ReportService } from './services/reports.service';
     HomeComponent,
     MainComponent,
     RecordComponent,
+    ReservationComponent,
     CategoryComponent,
     TitledInputComponent,
     SubCategoryComponent,

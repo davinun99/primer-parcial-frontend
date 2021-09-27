@@ -10,15 +10,24 @@ export class ReservationService {
   private httpOptions: object  = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json',
-      'usuario': 'gustavo'
+      'usuario': 'usuario2'
     })
   
   };
   constructor(private _http: HttpClient) { }
-  public async getCompleteAgenda(idFisioterapeuta: number, fecha: Date): Promise<any[]> {
-    const urlApi:string = `${this.urlApiPersona}/${idFisioterapeuta}/agenda?fecha=${getFechaForQuery(fecha)}`;
-    const { lista } = await this._http.get<any>(urlApi).toPromise();
-    return lista;
+  mapReservations = (reservation:any) => ({
+    ...reservation, 
+    fecha:  new Date(reservation.fecha).toLocaleDateString(),
+    horaInicio: reservation.horaInicio.length <= 9 ? reservation.horaInicio.substr(0,5): reservation.horaInicio.substr(11,5),
+    horaFin: reservation.horaFin.length <= 9 ? reservation.horaFin.substr(0,5): reservation.horaFin.substr(11,5),
+    flagAsistio: reservation.flagAsistio ? 'Si' : 'No',
+    flagReserva: Number.isInteger(reservation.idReserva) ? 'Si' : 'No',
+  });
+  public async getCompleteAgenda(idFisioterapeuta: number, fechaDesde: string, fechaHasta: string): Promise<any[]> {
+    const urlApi:string = `${this.urlApiPersona}/${idFisioterapeuta}/agenda?fecha=${fechaDesde}`;
+    let obj:any = await this._http.get<any>(urlApi).toPromise();
+    obj = obj.map(this.mapReservations);
+    return obj;
   }
 
   public async getFreeAgenda(idFisioterapeuta: number, fecha: Date): Promise<any[]> {
@@ -39,12 +48,12 @@ export class ReservationService {
     return lista;
   }
 
-  public async createReservation(fechaCadena:string, horaInicioCadena:string, horaFinCadena:string, idEmpleado:number, idCliente:string ): Promise<any> {
+  public async createReservation(fechaCadena:string, horaInicioCadena:string, horaFinCadena:string, idEmpleado:number, idCliente:number ): Promise<any> {
     const requestObj:Object = {
       fechaCadena, horaInicioCadena, horaFinCadena, idEmpleado: {
-        idPersona: idEmpleado
+        idPersona: Number(idEmpleado)
       }, idCliente: {
-        idPersona: idCliente
+        idPersona: Number(idCliente)
       }
     };
     const result = await this._http.post<any>(this.urlApiReserva, requestObj, this.httpOptions).toPromise();
