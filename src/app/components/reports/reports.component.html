@@ -17,23 +17,35 @@
 
 
 
-<full-page-modal title="Reportes" (back)="back.emit()">
+<full-page-modal title="Reportes" style="width: 700px;" (back)="back.emit()">
 
 
-    <div class="container">
+    <div class="container" style="width: 700px;">
+      <br><div>
+        <button class="p-10 text-white br-4 bg-primary" (click)="downloadPDF()">Download PDF</button>
+      </div><br>
+      Fecha desde: <input ngDefaultControl type="date" [(ngModel)]="fechaDesde"/>
+      Fecha hasta: <input ngDefaultControl type="date" [(ngModel)]="fechaHasta"/>
+      <button class="p-10 text-white br-4 bg-primary" (click)="getServiceFromTo()">Filtrar por fecha</button>
+      <br/><br/>
+
         <div class="row">
           <div id="htmlData">
 
+
+
+    
             <table class="table table-bordered mt-4">
-              <tr class="table-primary">
+              <!--<tr >
                 <th>Fecha del servicio</th>
                 <th>Fisioterapeuta</th>
                 <th>Paciente</th>
                 <th>Presupuesto</th>
                 <th>Subcategoría</th>
-              </tr>
+              </tr>-->
+          
               <tr *ngFor="let service of services">
-                <th>{{service.fechaHora}}</th>
+                <td>{{service.fechaHora}}</td>
                 <td>{{service.idEmpleado.nombre}} {{service.idEmpleado.apellido}}</td>
                 <td>{{service.idFichaClinica.idCliente.nombre}} {{service.idFichaClinica.idCliente.apellido}}</td>
                 <td>{{service.presupuesto}}</td>
@@ -45,7 +57,5 @@
       </div>
       
       
-      <div>
-        <button class="btn col col-lg-4 btn-danger btn-block ml-4" (click)="downloadPDF()">Download PDF</button>
-      </div>
+
 </full-page-modal>

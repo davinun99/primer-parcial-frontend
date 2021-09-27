@@ -2,6 +2,8 @@ import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef } from '
 import { ReportService } from 'src/app/services/reports.service';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import { getFechaForQuery } from 'src/app/services/utils';
+
 @Component({
   selector: 'app-reports',
   templateUrl: './reports.component.html',
@@ -13,9 +15,17 @@ export class ReportsComponent implements OnInit {
   public editingModal: boolean = false;
   public selectedReport: any = {};
   public services: Array<any> = [];
+  public fechaDesde: string;
+
+  public fechaHasta: string;
+
+    
   @Output() back = new EventEmitter();
   constructor(private _service: ReportService) {
     this.clearSelectedReport();
+    const fecha:string = getFechaForQuery( new Date((new Date()).valueOf() - 1000*60*60*24));
+    this.fechaDesde = `${fecha.substr(0,4)}-${fecha.substr(4,2)}-${fecha.substr(6)}`;
+    this.fechaHasta = `${fecha.substr(0,4)}-${fecha.substr(4,2)}-${fecha.substr(6)}`;
   }
   clearSelectedReport() {
     this.selectedReport = {
@@ -61,7 +71,9 @@ export class ReportsComponent implements OnInit {
     this.downloadPDF();
     
   }
-
+  async getServiceFromTo(){
+    this.services = await this._service.getServiceFromTo( this.fechaDesde, this.fechaHasta);  
+  }
 
   downloadPDF() {
     // Extraemos el

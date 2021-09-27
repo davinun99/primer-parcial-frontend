@@ -11,9 +11,9 @@ export class ReportService {
 
   constructor(private http: HttpClient) {}
 
-  public async getServiceFromTo( fechaDesde: Date, fechaHasta: Date): Promise<any[]> {
-    const fechaDesdeCadena: string = getFechaForQuery(fechaDesde);
-    const fechaHastaCadena: string = getFechaForQuery(fechaHasta);
+  public async getServiceFromTo( fechaDesde: string, fechaHasta: string): Promise<any[]> {
+    const fechaDesdeCadena: string = fechaDesde.replace(/-/gi, '');
+    const fechaHastaCadena: string = fechaHasta.replace(/-/gi, '');
     const requestObj =  {"fechaDesdeCadena":fechaDesdeCadena, "fechaHastaCadena":fechaHastaCadena}; 
 
     const urlApi:string = `${this.api}?ejemplo=${encodeURIComponent(JSON.stringify(requestObj))}`;
