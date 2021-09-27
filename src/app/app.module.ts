@@ -34,6 +34,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //import { MatTableModule } from '@angular/material/table/table-module';
 import { MatTableModule } from '@angular/material/table';
 import { MatTableExporterModule } from 'mat-table-exporter';
+import { RegistrarFacturaComponent } from './components/factura/registrar-factura.component';
+import { FacturaService } from './services/factura.service';
 
 @NgModule({
   declarations: [
@@ -53,6 +55,7 @@ import { MatTableExporterModule } from 'mat-table-exporter';
     PatientComponent,
     DoctorComponent,
     ReportsComponent,
+    RegistrarFacturaComponent,
     
   ],
   imports: [
@@ -72,7 +75,8 @@ import { MatTableExporterModule } from 'mat-table-exporter';
     ServiceService,
     PatientService,
     DoctorService,
-    ReportService
+    ReportService,
+    FacturaService
   ],
   bootstrap: [AppComponent]
 })

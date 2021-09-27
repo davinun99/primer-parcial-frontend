@@ -6,33 +6,51 @@ import { getFechaForQuery } from 'src/app/services/utils';
 import { Workbook } from 'exceljs';
 
 import * as fs from 'file-saver';
+import { FacturaService } from 'src/app/services/factura.service';
 
 @Component({
-  selector: 'app-reports',
-  templateUrl: './reports.component.html',
-  styleUrls: ['./reports.component.css']
+  selector: 'app-registrar-factura',
+  templateUrl: './registrar-factura.component.html',
+  styleUrls: ['./registrar-factura.component.css']
 })
 
-export class ReportsComponent implements OnInit {
+export class RegistrarFacturaComponent implements OnInit {
   public showAddModal: boolean = false;
   public editingModal: boolean = false;
   public selectedReport: any = {};
   public services: Array<any> = [];
+  public fichas: Array<any> = [];
   public fechaDesde: string;
   public idPatient: string;
   public idFisioterapeuta: string;
   public idServicio: number;
   public fechaHasta: string;
+  public obs: string;
   public workbook = new Workbook();
+  public selectedFichaId: number = 0;
+  public products: Array<any> = [];
+  public selectedService: any = {};
+  clearSelectedService() {
+    this.selectedService = {
+      id: '',
+      name: '',
+      product: null,
+      flag: 'S',
+      code: '',
+      price: ''
+    };
+  }
+  
     
   @Output() back = new EventEmitter();
-  constructor(private _service: ReportService) {
+  constructor(private _service: FacturaService) {
     this.clearSelectedReport();
     const fecha:string = getFechaForQuery( new Date((new Date()).valueOf() - 1000*60*60*24));
     this.fechaDesde = `${fecha.substr(0,4)}-${fecha.substr(4,2)}-${fecha.substr(6)}`;
     this.fechaHasta = `${fecha.substr(0,4)}-${fecha.substr(4,2)}-${fecha.substr(6)}`;
     this.idPatient = "0";
     this.idFisioterapeuta = "0";
+    this.obs = "0";
     this.idServicio = 0;
 
   }
@@ -101,10 +119,16 @@ export class ReportsComponent implements OnInit {
     this.services = await this._service.getAllDetailService();
   }
 
+  async loadServicesFromServer() {
 
+    this.products = await this._service.getAllProducts();
+  }
   ngOnInit(): void {
     this.loadService();
     this.downloadPDF();
+    this.getAllFicha();
+    this.loadServicesFromServer();
+    this.clearSelectedService();
     
   }
   async getServiceFromTo(){
@@ -118,6 +142,28 @@ export class ReportsComponent implements OnInit {
   }
   async getDetailServiceById(){
     this.services = await this._service.getDetailServiceById( this.idServicio);  
+  }
+  async getAllFicha(){
+    this.fichas = await this._service.getAllFicha();  
+  }
+  public get isValidSelectedService(): boolean {
+    return this.selectedService &&
+      this.selectedService.name &&
+      this.selectedService.product &&
+      this.selectedService.flag &&
+      this.selectedService.code &&
+      this.selectedService.price;
+  }
+  async confirmAction() {
+
+    // Create new service
+    await this.createService();
+  }
+  async createService() {
+    //const newService = await this._service.createFacturaDetalle(cant:number, idPresentacionProducto:number,idServicio:number );
+    //this.services = this.services.concat(newService);
+    this.clearSelectedService();
+    this.showAddModal = false;
   }
 
   downloadPDF() {
