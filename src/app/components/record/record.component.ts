@@ -12,7 +12,7 @@ export class RecordComponent implements OnInit {
   public patients: Array<any> = [];
   public categories: Array<any> = [];
   public subCategoriesAvailable: Array<any> = [];
-
+  public subCategoriesAvailableForNewFicha: Array<any> = [];
   public fechaDesdeReserva: string = '';
   public fechaHastaReserva: string = '';
 
@@ -23,6 +23,12 @@ export class RecordComponent implements OnInit {
 
   public records: Array<any> = [];
 
+  public nuevaFicha: any = {
+    idCliente: {},
+    idEmpleado: {},
+    idTipoProducto: {}
+  };
+  
   constructor( private _doctorService: DoctorService, private _patientService: PatientService, private _categoryService: CategoryService, private _fichaService: FichaService ) { }
   async loadInitialData(){
     this.patients = await this._patientService.getAllPatients();
@@ -33,6 +39,11 @@ export class RecordComponent implements OnInit {
     this.selectedCategoryId = Number(this.selectedCategoryId);
     this.subCategoriesAvailable = await this._categoryService.getAllSubCategories();
     this.subCategoriesAvailable = this.subCategoriesAvailable.filter( subCat => ( subCat.categoryId === this.selectedCategoryId ) );
+  }
+  async handleNewCategoryChange(){
+    this.nuevaFicha.idTipoProducto.idTipoProducto = Number(this.nuevaFicha.idTipoProducto.idTipoProducto);
+    this.subCategoriesAvailableForNewFicha = await this._categoryService.getAllSubCategories();
+    this.subCategoriesAvailableForNewFicha = this.subCategoriesAvailableForNewFicha.filter( subCat => ( subCat.categoryId === this.nuevaFicha.idTipoProducto.idTipoProducto ) );
   }
   async searchWithFilters(){
     this.selectedDoctorId = Number(this.selectedDoctorId);
@@ -63,6 +74,9 @@ export class RecordComponent implements OnInit {
       const fechaHastaFormateada:string = this.fechaHastaReserva.replace(/-/gi, '') + '2359';
       this.records = this.records.filter( record => record.fechaHoraCadena <= fechaHastaFormateada );
     }
+  }
+  async saveRecord(){
+    await this._fichaService.createFicha(this.nuevaFicha.motivoConsulta, this.nuevaFicha.diagnostico, this.nuevaFicha.idEmpleado.idPersona, this.nuevaFicha.idCliente.idPersona, this.nuevaFicha.idTipoProducto.idTipoProducto, this.nuevaFicha.observacion);
   }
   ngOnInit(): void {
     this.loadInitialData();

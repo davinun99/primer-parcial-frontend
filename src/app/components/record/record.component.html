@@ -6,6 +6,8 @@
     }
     .fichaContent{
         padding: 0 2rem;
+        width: 100vw;
+        display: flex;
     }
     .tableContainer{
         width: 100vw;
@@ -25,37 +27,73 @@
     tr:nth-child(even) {
         background-color: #dddddd;
     }
+    @media only screen and (min-width: 700px){
+        .leftContent{
+            width: 35%;
+        }
+    }
+    
 </style>
+<h2 class="fichaTitle">Fichas</h2>
 <main class="fichaContent">
-    <h2 class="fichaTitle">Fichas</h2>
-    Doctor : <select [(ngModel)]="selectedDoctorId">
-        <option *ngFor="let doctor of doctors" [value]="doctor.idPersona">
-            Dr. {{doctor.nombre}}  {{doctor.apellido}} 
-        </option>
-    </select><br/><br/>
-    Paciente : <select [(ngModel)]="selectedPatientId">
-        <option *ngFor="let patient of patients" [value]="patient.id">
-            {{patient.fullName}}
-        </option>
-    </select><br/><br/>
-    Fecha desde: <input ngDefaultControl type="date" [(ngModel)]="fechaDesdeReserva"/><br/><br/>
-    Fecha hasta: <input ngDefaultControl type="date" [(ngModel)]="fechaHastaReserva"/><br/><br/>
-    Categoria : <select [(ngModel)]="selectedCategoryId" (change)="handleCategoryChange()" >
-        <option *ngFor="let category of categories" [value]="category.id">
-            {{category.name}}
-        </option>
-    </select><br/><br/>
-    <div *ngIf="selectedCategoryId !== 0">
-        Subcategoria : <select [(ngModel)]="selectedSubCategoryId">
-            <option *ngFor="let subCategory of subCategoriesAvailable" [value]="subCategory.id">
-                {{subCategory.name}}
+    <div class="leftContent">
+        Doctor : <select [(ngModel)]="selectedDoctorId">
+            <option *ngFor="let doctor of doctors" [value]="doctor.idPersona">
+                Dr. {{doctor.nombre}}  {{doctor.apellido}} 
             </option>
-        </select>
+        </select><br/><br/>
+        Paciente : <select [(ngModel)]="selectedPatientId">
+            <option *ngFor="let patient of patients" [value]="patient.id">
+                {{patient.fullName}}
+            </option>
+        </select><br/><br/>
+        Fecha desde: <input ngDefaultControl type="date" [(ngModel)]="fechaDesdeReserva"/><br/><br/>
+        Fecha hasta: <input ngDefaultControl type="date" [(ngModel)]="fechaHastaReserva"/><br/><br/>
+        Categoria : <select [(ngModel)]="selectedCategoryId" (change)="handleCategoryChange()" >
+            <option *ngFor="let category of categories" [value]="category.id">
+                {{category.name}}
+            </option>
+        </select><br/><br/>
+        <div *ngIf="selectedCategoryId !== 0">
+            Subcategoria : <select [(ngModel)]="selectedSubCategoryId">
+                <option *ngFor="let subCategory of subCategoriesAvailable" [value]="subCategory.id">
+                    {{subCategory.name}}
+                </option>
+            </select>
+        </div>
+        <button class="p-10 text-white br-4 bg-primary m-3" (click)="searchWithFilters()">Buscar</button>
     </div>
-    <button class="p-10 text-white br-4 bg-primary m-3" (click)="searchWithFilters()">Buscar</button>
+    <div class="rightContent">
+        <h3>Nueva ficha</h3>
+        Doctor: <select [(ngModel)]="nuevaFicha.idEmpleado.idPersona">
+            <option *ngFor="let doctor of doctors" [value]="doctor.idPersona">
+                Dr. {{doctor.nombre}}  {{doctor.apellido}} 
+            </option>
+        </select><br/><br/>
+        Paciente : <select [(ngModel)]="nuevaFicha.idCliente.idPersona">
+            <option *ngFor="let patient of patients" [value]="patient.id">
+                {{patient.fullName}}
+            </option>
+        </select><br/><br/>
+        Categoria : <select [(ngModel)]="nuevaFicha.idTipoProducto.idTipoProducto" (change)="handleNewCategoryChange()" >
+            <option *ngFor="let category of categories" [value]="category.id">
+                {{category.name}}
+            </option>
+        </select><br/><br/>
+        <div *ngIf="nuevaFicha.idTipoProducto.idTipoProducto !== 0">
+            Subcategoria : <select [(ngModel)]="selectedSubCategoryId">
+                <option *ngFor="let subCategory of subCategoriesAvailableForNewFicha" [value]="subCategory.id">
+                    {{subCategory.name}}
+                </option>
+            </select>
+        </div><br/>
+        Motivo: <input type="text" [(ngModel)]="nuevaFicha.motivoConsulta"><br><br>
+        Diagnostico: <input type="text" [(ngModel)]="nuevaFicha.diagnostico"><br><br>
+        Observacion: <textarea [(ngModel)]="nuevaFicha.observacion"></textarea><br><br>
+        <button class="p-10 text-white br-4 bg-primary m-3" (click)="saveRecord()">Guardar nueva ficha</button>
+    </div>
 </main>
 <section>
-    
     <table class="table" class="mt-10">
         <tr>
             <th>Fecha</th>

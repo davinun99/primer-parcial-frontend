@@ -9,16 +9,16 @@ export class FichaService {
     private httpOptions: object  = {
         headers: new HttpHeaders({
         'Content-Type':  'application/json',
-        'usuario': 'gustavo'
+        'usuario': 'usuario2'
         })
     };
     constructor(private _http: HttpClient) { }
-    public async createFicha(motivoConsulta:string, diagnostico:string, idDoctor:number, idCliente:number, idSubcategoria:number, obsevacion: string = ''): Promise<any> {
+    public async createFicha(motivoConsulta:string, diagnostico:string, idDoctor:number, idCliente:number, idSubcategoria:number, observacion: string = ''): Promise<any> {
         // - Para registrar una ficha clínica (al cargar la pantalla de registro de ficha el cliente puede
         //     preseleccionarse si existe una reserva de turno, el campo de observación es opcional, la fecha
         //     se carga en el backend automáticamente):
         const requestObj:Object ={
-            motivoConsulta, diagnostico, obsevacion,
+            motivoConsulta, diagnostico, observacion,
             "idEmpleado":{
                 "idPersona":idDoctor
             },
