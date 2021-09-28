@@ -34,11 +34,6 @@ export class RecordComponent implements OnInit {
     this.subCategoriesAvailable = await this._categoryService.getAllSubCategories();
     this.subCategoriesAvailable = this.subCategoriesAvailable.filter( subCat => ( subCat.categoryId === this.selectedCategoryId ) );
   }
-  async searchByDoctor(){
-    this.selectedDoctorId = Number(this.selectedDoctorId);
-    this.records = await this._fichaService.getFichaByDoctor( this.selectedDoctorId );
-    console.log(this.records);
-  }
   async searchWithFilters(){
     this.selectedDoctorId = Number(this.selectedDoctorId);
     this.selectedPatientId = Number(this.selectedPatientId);
@@ -57,6 +52,16 @@ export class RecordComponent implements OnInit {
     //subCategories
     if(this.selectedSubCategoryId){
       this.records = this.records.filter( record => record.idTipoProducto.idTipoProducto === this.selectedSubCategoryId);
+    }
+    //since date
+    if( this.fechaDesdeReserva !== ''){
+      const fechaDesdeFormateada:string = this.fechaDesdeReserva.replace(/-/gi, '') + '00';
+      this.records = this.records.filter( record => record.fechaHoraCadena >= fechaDesdeFormateada );
+    }
+    //to date
+    if( this.fechaHastaReserva !== ''){
+      const fechaHastaFormateada:string = this.fechaHastaReserva.replace(/-/gi, '') + '2359';
+      this.records = this.records.filter( record => record.fechaHoraCadena <= fechaHastaFormateada );
     }
   }
   ngOnInit(): void {
