@@ -63,7 +63,10 @@ export class ServiceService {
   }
 
   public async getAllServices(): Promise<any[]> {
-    const { lista } = await this._http.get<any>(this.urlApiService).toPromise();
+    // const { lista } = await this._http.get<any>(this.urlApiService).toPromise();
+    const reqObj = {"nombre":"b"};//USAMOS NOMBRE POR MIENTRAS POR QUE NO ANDA EL GET ALL
+    const endpoint = `${this.urlApiService}?like=S&ejemplo=${encodeURIComponent(JSON.stringify(reqObj))}`;
+    const { lista } = await this._http.get<any>(endpoint).toPromise();
     const services = lista.map((s: any) => this.newServiceFromServer(s));
     this.services = services;
     return services;
