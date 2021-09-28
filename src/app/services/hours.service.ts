@@ -9,35 +9,58 @@ import { mainEndpoint, getFechaForQuery } from './utils';
 
 
 export class HoursService {
-  private api: string = mainEndpoint + "/stock-pwfe/personaHorarioAgenda";
+  private urlApiHour = mainEndpoint + '/stock-pwfe/personaHorarioAgenda';
+  public hours: Array<any> = [];
+
   private httpOptions: object  = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json',
-      'usuario': 'gustavo'
+      'usuario': 'usuario2'
     })
   
   };
-  constructor(private http: HttpClient) {}
+  constructor(private _http: HttpClient) {}
 
-  
-  getHorarioPaciente(id: number): Observable<listadatos<Horario>> {
-    const pacienteObj: Object = {"idEmpleado":{"idPersona": id}};  
-    return this.http.get<listadatos<Horario>>(`${this.api}/?ejemplo=${encodeURIComponent(JSON.stringify(pacienteObj))}`);
+  private newHourFromServer(h: any) {
+    return {
+      id: h.idEmpleado.idPersona,
+      day: h.dia,
+      hourOpen: h.horaAperturaCadena,
+      hourClose: h.horaCierreCadena,
+      interval: h.intervaloMinutos,
+    }
+  }
+  private newHourToSend(h: any): any {
+    return {
+      idEmpleado:{ idPersona: h.id},
+      dia: h.day,
+      horaAperturaCadena: h.hourOpen,
+      horaCierreCadena: h.hourClose,
+      intervaloMinutos: h.interval
+    }
   }
 
-  getHorarios(): Observable<listadatos<Horario>> {
-    return this.http.get<listadatos<Horario>>(this.api);
+  public async getAllHours(): Promise<any[]> {
+    const { lista } = await this._http.get<any>(this.urlApiHour).toPromise();
+    const hours= lista.map((h: any) => this.newHourFromServer(h));
+ 
+    console.log('hours:', hours);
+    this.hours = hours;
+    return hours;
   }
-  
-  agregarHorario(data: Horario): Observable<Horario> {
-      
-    return this.http.post<Horario>(this.api, data).pipe(
-      tap(
-        // Log the result or error
-        (data) => console.log('agregado ' + data),
-        (error) => console.log('error: ' + error)
-      )
-    );
+
+  public async createHour(hour: any): Promise<any> {
+    const result = await this._http.post<any>(
+      this.urlApiHour,
+      this.newHourToSend(hour),
+      this.httpOptions
+    ).toPromise();
+    return this.newHourFromServer(result);
+  }
+  public async editHour(hour: any): Promise<any> {
+    await this._http.put<any>(
+      this.urlApiHour,
+      this.newHourToSend(hour)).toPromise();
   }
 
 

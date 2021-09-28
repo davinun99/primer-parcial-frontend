@@ -25,19 +25,17 @@ export class HoursComponent implements OnInit {
 
 
 
-  constructor(private horarioService: HoursService) {
+  constructor(private _service: HoursService) {
     this.clearSelectedHour();
   }
   clearSelectedHour() {
     this.selectedHour = {
       id: '',
-      name: '',
-      lastName: '',
-      email: '',
-      phone: '',
-      document: '',
-      type: 'FISICA',
-      birthday: '',
+      day: '',
+      hourOpen: '',
+      hourClose: '',
+      interval: '',
+
     };
   }
 
@@ -54,7 +52,7 @@ export class HoursComponent implements OnInit {
   }
 
   async editHour() {
-    await this._service.editDoctor(this.selectedHour);
+    await this._service.editHour(this.selectedHour);
     this.clearSelectedHour();
     this.editingModal = false;
     this.showAddModal = false;
@@ -75,12 +73,11 @@ export class HoursComponent implements OnInit {
 
   public get isValidSelectedHour(): boolean {
     return !!this.selectedHour &&
-      !!this.selectedHour.name &&
-      !!this.selectedHour.lastName &&
-      !!this.selectedHour.document &&
-      !!this.selectedHour.phone &&
-      !!this.selectedHour.type &&
-      !!this.selectedHour.birthday;
+      !!this.selectedHour.day &&
+      !!this.selectedHour.hourOpen &&
+      !!this.selectedHour.hourClose &&
+      !!this.selectedHour.interval &&
+      !!this.selectedHour.id;
   }
 
   public getDayFromNumber(number: number): string {
@@ -91,7 +88,7 @@ export class HoursComponent implements OnInit {
   async loadHours() {
     this.hours = await this._service.getAllHours();
   }
-
+  
   ngOnInit(): void {
     this.loadHours();
   }

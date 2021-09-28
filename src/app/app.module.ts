@@ -10,6 +10,7 @@ import { CategoryService } from './services/category.service';
 import { ServiceService } from './services/service.service';
 import { PatientService } from './services/patient.service';
 import { DoctorService } from './services/doctor.service';
+import { HoursService } from './services/hours.service';
 
 // Components
 import { AppRoutingModule } from './app-routing.module';
@@ -28,6 +29,8 @@ import { ServiceComponent } from './components/service/service.component';
 import { FullPageModalComponent } from './components/includes/full-page-modal/full-page-modal.component';
 import { PatientComponent } from './components/patient/patient.component';
 import { DoctorComponent } from './components/doctor/doctor.component';
+import { HoursComponent } from './components/hours/hours.component';
+
 
 @NgModule({
   declarations: [
@@ -46,6 +49,7 @@ import { DoctorComponent } from './components/doctor/doctor.component';
     FullPageModalComponent,
     PatientComponent,
     DoctorComponent,
+    HoursComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,6 +64,7 @@ import { DoctorComponent } from './components/doctor/doctor.component';
     ServiceService,
     PatientService,
     DoctorService,
+    HoursService,
   ],
   bootstrap: [AppComponent]
 })
