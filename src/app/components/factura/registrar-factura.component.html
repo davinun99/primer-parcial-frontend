@@ -1,0 +1,163 @@
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+  
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+  
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+    input[type=text]  {
+    width: 10%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    background-color: #F9F9F9;
+  }
+    input[type=number]  {
+    width: 10%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    background-color: #F9F9F9;
+  }
+  input, select, textarea {
+   background: silver;
+   border: 1px solid #393939;
+   border-radius: 5px 5px 5px 5px;
+   color: #393939;
+   font-size: 12px;
+   padding: 5px;
+}
+  </style>
+  
+  
+  
+  <full-page-modal title="Registro de servicios para facturar a los pacientes"  style="width: 700px;" (back)="back.emit()">
+  
+  
+      <div class="container" style="width: 700px;">
+        Seleccione Ficha : <select [(ngModel)]="selectedFichaId">
+          <option *ngFor="let ficha of fichas" [value]="ficha.idFichaClinica">
+              id: {{ficha.idFichaClinica}} - {{ficha.motivoConsulta}} 
+          </option>
+      </select>
+      <br>
+      Observación: <textarea ngDefaultControl [(ngModel)]="obs"></textarea><br>
+      <br>
+
+      <button class="p-10 text-white br-4 bg-primary" (click)="createService()">Crear Factura</button>
+      <br>
+      <br>
+
+        Fecha desde: <input ngDefaultControl type="date" [(ngModel)]="fechaDesde"/>
+        Fecha hasta: <input ngDefaultControl type="date" [(ngModel)]="fechaHasta"/>
+        <button class="p-10 text-white br-4 bg-primary" (click)="getServiceFromTo()">Filtrar por fecha</button>
+        <br/><br/>
+  
+        <div class="col-5">
+          ID Paciente: <input
+            ngDefaultControl 
+            title="Ingrese el id del paciente" 
+            type="text"
+            [(ngModel)]="idPatient"/>
+          <button class="p-10 text-white br-4 bg-primary" (click)="getServiceByPatientId()">Filtrar por id Paciente</button>
+        </div>
+        
+        <br>
+        <div class="col-5">
+          ID Fisioterapeuta: <input 
+          class="form-control"
+          type="number" 
+          title="Ingrese el id del fisioterapeuta" 
+          [(ngModel)]="idFisioterapeuta" />
+          <button class="p-10 text-white br-4 bg-primary" (click)="getServiceByFisioId()">Filtrar por id de Fisioterapeuta</button>
+        </div>
+        
+        <br>
+  
+  
+        <div class="row">
+            <div id="htmlData">
+      
+              <table class="table table-bordered mt-4">
+                <!--<tr >
+                  <th>Fecha del servicio</th>
+                  <th>Fisioterapeuta</th>
+                  <th>Paciente</th>
+                  <th>Presupuesto</th>
+                  <th>Subcategoría</th>
+                </tr>-->
+            
+                <tr *ngFor="let service of services">
+                  <td>id: {{service.idServicio}}</td>
+                  <td>{{service.fechaHora}}</td>
+                  <td>{{service.idEmpleado.idPersona}} - {{service.idEmpleado.nombre}} {{service.idEmpleado.apellido}}</td>
+                  <td>{{service.idFichaClinica.idCliente.idPersona}} - {{service.idFichaClinica.idCliente.nombre}} {{service.idFichaClinica.idCliente.apellido}}</td>
+                  <td>{{service.presupuesto}}</td>
+                  <td>{{service.idFichaClinica.idTipoProducto.idCategoria.descripcion}} </td>
+              </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+        
+  
+    <!-- NEW SERVICE MODAL -->
+
+    <back-modal 
+        ngDefaultControl
+        [title]="'Nueva factura'"
+        [(ngModel)]="showAddModal"
+        [canConfirm]="isValidSelectedService"
+        [confirmButtonText]="'Crear factura'"
+        (confirmed)="createDetalle()"
+    >
+        <!-- NEW SERVICE CODE -->
+        ID FichaClinica: <input 
+            ngDefaultControl 
+            title="Id Ficha" 
+            value="{{selectedFichaId}}"
+            readonly
+            />
+            <br>  
+        <!-- NEW SERVICE NAME -->
+        Observación: <input 
+        ngDefaultControl 
+        title="Observación" 
+        value="{{obs}}"
+        readonly
+        /><br>
+        <!-- NEW SERVICE PRICE -->
+        idServicio: <input 
+        ngDefaultControl 
+        title="idServicio" 
+        value="{{idServicio}}"
+        readonly
+        /><br>
+        <!-- PRODUCT LIST (SELECTOR) -->
+        <div class="p-v-10 column" style="max-height:200px;overflow:auto">
+            <div class="text-grey-7 fs-12 mb-15 p-h-5">
+                Seleccionar producto
+            </div>
+            <!-- PRODUCT LIST ITEMS -->
+            <button *ngFor="let product of products" 
+                class="p-10 border-1 br-4 mb-5 text-left row justify-between"
+                [ngClass]="selectedService===product?'bg-grey-e':''"
+                (click)="selectedService=product"
+            >
+                <div>{{product.idProducto}} - {{product.descripcionGeneral}}</div>
+                <i *ngIf="selectedService===product" class="fas fa-check"></i>
+            </button>
+        </div>
+
+    </back-modal>
+
+  
+  </full-page-modal>

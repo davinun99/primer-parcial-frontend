@@ -1,0 +1,130 @@
+<style>
+.selected-tab {
+    color: white;
+    border-radius: 50px;
+}
+.footer-container {
+    border-bottom: 1px solid #ddd;
+    
+}
+.tab-item {
+    text-align: left;
+    flex: 1;
+    flex-basis: 0;
+    padding: 20px;
+    margin: 0;
+    border-top: 1px solid #ddd;
+}
+
+</style>
+
+<!-- CATEGORY LIST -->
+
+<category-list
+    *ngIf="tab === 'category'"
+    (back)="tab=''">
+</category-list>
+
+<!-- SERVICE LIST -->
+
+<service-list 
+    *ngIf="tab === 'service'" 
+    (back)="tab=''">
+</service-list>
+
+<!-- PATIENT LIST -->
+
+<patient-list
+    *ngIf="tab === 'patient'" 
+    (back)="tab=''">
+</patient-list>
+
+<!-- DOCTOR LIST -->
+
+<doctor-list
+    *ngIf="tab === 'personal'" 
+    (back)="tab=''">
+</doctor-list>
+<!-- REPORTS LIST -->
+
+<app-reports
+    *ngIf="tab === 'report'" 
+    (back)="tab=''">
+</app-reports>
+
+<app-registrar-factura
+    *ngIf="tab === 'factura'" 
+    (back)="tab=''">
+</app-registrar-factura>
+
+<!-- Horario LIST -->
+
+<hours-list
+    *ngIf="tab === 'horario'" 
+    (back)="tab=''">
+</hours-list>
+
+<!-- HORARIO EXCEPCIONAL LIST -->
+
+<exceptionalhour-list
+    *ngIf="tab === 'horarioexc'" 
+    (back)="tab=''">
+</exceptionalhour-list>
+<!-- TITLE -->
+
+<div class="p-10 bg-grey-f2 text-grey-5">
+    Configuración del sistema
+</div>
+
+<!-- CONFIG SUB FOOTER -->
+
+<div class="column footer-container">
+
+    <button class="tab-item" (click)="tab='category'">
+        <div>
+            <div><strong>Categorías</strong></div>
+            <p class="mt-10 text-grey-5 fs-13">Gestión de categorías y subcategorías de fichas clínicas</p>
+        </div>
+    </button>
+    <button class="tab-item" (click)="tab='service'">
+        <div>
+            <div><strong>Servicios</strong></div>
+            <p class="mt-10 text-grey-5 fs-13">Gestión de los servicios ofrecidos a los clientes</p>
+        </div>
+    </button>
+    <button class="tab-item" (click)="tab='patient'">
+        <div>
+            <div><strong>Pacientes</strong></div>
+            <p class="mt-10 text-grey-5 fs-13">Gestión de pacientes</p>
+        </div>
+    </button>
+    <button class="tab-item" (click)="tab='personal'">
+        <div>
+            <div><strong>Personal</strong></div>
+            <p class="mt-10 text-grey-5 fs-13">Gestión de personal y calendario de atención.</p>
+        </div>
+    </button>
+    <button class="tab-item" (click)="tab='horario'">
+        <div><strong>Horarios</strong></div>
+        <p class="mt-10 text-grey-5 fs-13">Gestión de horarios.</p>
+        
+    </button>
+    <button class="tab-item" (click)="tab='horarioexc'">
+        <div><strong>Horarios Excepcionales</strong></div>
+        <p class="mt-10 text-grey-5 fs-13">Gestión de horarios excepcionales.</p>
+        
+    </button>
+    <button class="tab-item" (click)="tab='report'">
+        <div>
+            <div><strong>Reportes</strong></div>
+            <p class="mt-10 text-grey-5 fs-13">Reporte de servicios</p>
+        </div>
+    </button>
+    <button class="tab-item" (click)="tab='factura'">
+        <div>
+            <div><strong>Registrar servicios facturación</strong></div>
+            <p class="mt-10 text-grey-5 fs-13">Registrar servicios para facturar a los pacientes</p>
+        </div>
+    </button>
+
+</div>

@@ -1,0 +1,68 @@
+<style>
+.tab-item {
+    padding: 10px 20px;
+    margin: 0 5px;
+    color: #555;
+    text-align: center;
+    font-weight: bold;
+}
+.selected-tab {
+    color:white;
+}
+.selected-tab,
+.full-bordered,
+.tab-item {
+    border-radius: 50px;
+}
+.footer-container {
+    border-bottom: 1px solid #ddd;
+    z-index: 50;
+}
+
+@media screen and (max-width: 480px) {
+    .footer-container {
+        position: absolute;
+        bottom:0;
+        left:0;
+        right:0;
+        background-color: #eee;
+        box-shadow: 0 0 10px 5px #0000002a;
+        border-top: 1px solid #ddd;
+        justify-content: space-between;
+    }
+    .tab-item {
+        flex: 1;
+        flex-basis: 0;
+        padding: 12px 10px;
+        margin: 0 10px;
+    }
+}
+</style>
+
+<!-- FOOTER / TABS -->
+<div class="row p-v-5 footer-container">
+
+    <button class="tab-item" (click)="tab='record'"
+        [ngClass]="[tab === 'record' ? 'bg-primary selected-tab' : '']" 
+    >
+        Fichas
+    </button>
+    <button class="tab-item" (click)="tab='reservation'"
+        [ngClass]="[tab === 'reservation' ? 'bg-primary selected-tab' : '']" 
+    >
+        Reservas
+    </button>
+    <button class="tab-item" (click)="tab='config'"
+        [ngClass]="[tab === 'config' ? 'bg-primary selected-tab' : '']" 
+    >
+        Configuración
+    </button>
+
+</div>
+
+<!-- TABS PAGES -->
+<record-tab *ngIf="tab === 'record'"></record-tab>
+<!-- RESERVATION TAB-->
+<reservation-tab *ngIf="tab === 'reservation'"></reservation-tab>
+<!-- CONFIG TAB -->
+<config-tab *ngIf="tab === 'config'"></config-tab>

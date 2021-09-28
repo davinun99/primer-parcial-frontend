@@ -1,150 +1,93 @@
 import { NgModule } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule } from '@angular/router';
+import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { APP_BASE_HREF } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-import {MatNativeDateModule} from '@angular/material/core';
-import {MatButtonModule} from '@angular/material/button';
-import {MatInputModule} from '@angular/material/input';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatRadioModule} from '@angular/material/radio';
-import {MatSelectModule} from '@angular/material/select';
-import {MatSliderModule} from '@angular/material/slider';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatListModule} from '@angular/material/list';
-import {MatGridListModule} from '@angular/material/grid-list';
-import {MatCardModule} from '@angular/material/card';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatStepperModule} from '@angular/material/stepper';
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
-import {MatChipsModule} from '@angular/material/chips';
-import {MatIconModule} from '@angular/material/icon';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatTooltipModule} from '@angular/material/tooltip';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {MatTableModule} from '@angular/material/table';
-import {MatSortModule} from '@angular/material/sort';
-import {MatPaginatorModule} from '@angular/material/paginator';
+// Services
+import { AccountService } from './services/account.service';
+import { CategoryService } from './services/category.service';
+import { ServiceService } from './services/service.service';
+import { PatientService } from './services/patient.service';
+import { DoctorService } from './services/doctor.service';
+import { HoursService } from './services/hours.service';
+import { ExceptionalHourService } from './services/exceptionalhour.service';
 
+// Components
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { LoginComponent } from './pages/login/login.component';
+import { HomeComponent } from './pages/home/home.component';
+import { MainComponent } from './layouts/main/main.component';
+import { RecordComponent } from './components/record/record.component';
+import {ReservationComponent} from './components/reservation/reservation.component';
+import { CategoryComponent } from './components/category/category.component';
+import { TitledInputComponent } from './components/includes/titled-input/titled-input.component';
+import { SubCategoryComponent } from './components/sub-category/sub-category.component';
+import { BackModalComponent } from './components/includes/back-modal/back-modal.component';
+import { ConfigComponent } from './components/config/config.component';
+import { ServiceComponent } from './components/service/service.component';
+import { FullPageModalComponent } from './components/includes/full-page-modal/full-page-modal.component';
+import { PatientComponent } from './components/patient/patient.component';
+import { DoctorComponent } from './components/doctor/doctor.component';
+import { HoursComponent } from './components/hours/hours.component';
+import { ExceptionalHourComponent } from './components/exceptionalhour/exceptionalhour.component';
+import { ReportsComponent } from './components/reports/reports.component';
+import { ReportService } from './services/reports.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+//import { MatTableModule } from '@angular/material/table/table-module';
+import { MatTableModule } from '@angular/material/table';
+import { MatTableExporterModule } from 'mat-table-exporter';
+import { RegistrarFacturaComponent } from './components/factura/registrar-factura.component';
+import { FacturaService } from './services/factura.service';
 
-import { SidebarModule } from './sidebar/sidebar.module';
-import { FooterModule } from './shared/footer/footer.module';
-import { NavbarModule} from './shared/navbar/navbar.module';
-import { FixedpluginModule} from './shared/fixedplugin/fixedplugin.module';
-import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
-import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
-
-import { AppRoutes } from './app.routing';
-import { PaisComponent } from './pais/pais.component';
-import { PaisAgregarComponent } from './pais/pais-agregar/pais-agregar.component';
-import { CategoriasComponent } from './categorias/categorias.component';
-import { CategoriasAgregarComponent } from './categorias/categorias-agregar/categorias-agregar.component';
-import { SubcategoriaComponent } from './subcategoria/subcategoria.component';
-import { PacienteComponent } from './paciente/paciente.component';
-import { ServiciosComponent } from './servicios/servicios.component';
-import { PacienteAgregarComponent } from './paciente/paciente-agregar/paciente-agregar.component';
-import { HorarioComponent } from './horario/horario.component';
-import { HorarioAgregarComponent } from './horario/horario-agregar/horario-agregar.component';
-import { HorarioexcComponent } from './horarioexc/horarioexc.component';
-import { HorariopComponent } from './horario/horariop.component';
-import { FichaClinicaComponent } from './ficha-clinica/ficha-clinica.component';
-import { FichaClinicaAgregarComponent } from './ficha-clinica/ficha-clinica-agregar/ficha-clinica-agregar.component';
-import { HorarioexcAgregarComponent } from './horarioexc/horarioexc-agregar/horarioexc-agregar.component';
-
-
-@NgModule({
-  exports: [
-    MatAutocompleteModule,
-    MatButtonToggleModule,
-    MatCardModule,
-    MatChipsModule,
-    MatCheckboxModule,
-    MatStepperModule,
-    MatDialogModule,
-    MatExpansionModule,
-    MatGridListModule,
-    MatIconModule,
-    MatInputModule,
-    MatListModule,
-    MatMenuModule,
-    MatPaginatorModule,
-    MatProgressBarModule,
-    MatProgressSpinnerModule,
-    MatRadioModule,
-    MatSelectModule,
-    MatDatepickerModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatSliderModule,
-    MatSlideToggleModule,
-    MatSnackBarModule,
-    MatSortModule,
-    MatTableModule,
-    MatTabsModule,
-    MatToolbarModule,
-    MatTooltipModule,
-    MatNativeDateModule
-  ],
-  declarations: [ ]
-})
-export class MaterialModule {}
 
 @NgModule({
-    imports:      [
-        CommonModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        RouterModule.forRoot(AppRoutes,{
-          useHash: true
-        }),
-        HttpClientModule,
-
-        MaterialModule,
-        SidebarModule,
-        NavbarModule,
-        FooterModule,
-        FixedpluginModule,
-        FormsModule
-    ],
-    declarations: [
-        AppComponent,
-        AdminLayoutComponent,
-        AuthLayoutComponent,
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    HomeComponent,
+    MainComponent,
+    RecordComponent,
+    ReservationComponent,
+    CategoryComponent,
+    TitledInputComponent,
+    SubCategoryComponent,
+    BackModalComponent,
+    ConfigComponent,
+    ServiceComponent,
+    FullPageModalComponent,
+    PatientComponent,
+    DoctorComponent,
+    HoursComponent,
+    ExceptionalHourComponent,
+    ReportsComponent,
+    RegistrarFacturaComponent,
     
-        PaisComponent,
-        PaisAgregarComponent,
-        CategoriasComponent,
-        CategoriasAgregarComponent,
-        SubcategoriaComponent,
-        PacienteComponent,
-        ServiciosComponent,
-        PacienteAgregarComponent,
-        HorarioComponent,
-        HorarioAgregarComponent,
-        HorarioexcComponent,
-        HorariopComponent,
-        FichaClinicaComponent,
-        FichaClinicaAgregarComponent,
-        HorarioexcAgregarComponent
- 
-
-    ],
-    providers : [
-        MatNativeDateModule
-    ],
-    bootstrap:    [ AppComponent ]
+  ],
+  imports: [
+    BrowserModule,
+    CommonModule,
+    HttpClientModule,
+    FormsModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatTableModule, 
+    MatTableExporterModule,
+    
+  ],
+  providers: [
+    AccountService,
+    CategoryService,
+    ServiceService,
+    PatientService,
+    DoctorService,
+    HoursService,
+    ExceptionalHourComponent,
+    ReportService,
+    FacturaService
+  ],
+  bootstrap: [AppComponent]
 })
+
 export class AppModule { }
