@@ -57,6 +57,19 @@
     (back)="tab=''">
 </app-registrar-factura>
 
+<!-- Horario LIST -->
+
+<hours-list
+    *ngIf="tab === 'horario'" 
+    (back)="tab=''">
+</hours-list>
+
+<!-- HORARIO EXCEPCIONAL LIST -->
+
+<exceptionalhour-list
+    *ngIf="tab === 'horarioexc'" 
+    (back)="tab=''">
+</exceptionalhour-list>
 <!-- TITLE -->
 
 <div class="p-10 bg-grey-f2 text-grey-5">
@@ -91,8 +104,15 @@
             <p class="mt-10 text-grey-5 fs-13">Gestión de personal y calendario de atención.</p>
         </div>
     </button>
-    <button class="tab-item" (click)="tab='exception'">
-        Horario de excepción de fisioteraputas
+    <button class="tab-item" (click)="tab='horario'">
+        <div><strong>Horarios</strong></div>
+        <p class="mt-10 text-grey-5 fs-13">Gestión de horarios.</p>
+        
+    </button>
+    <button class="tab-item" (click)="tab='horarioexc'">
+        <div><strong>Horarios Excepcionales</strong></div>
+        <p class="mt-10 text-grey-5 fs-13">Gestión de horarios excepcionales.</p>
+        
     </button>
     <button class="tab-item" (click)="tab='report'">
         <div>

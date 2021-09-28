@@ -10,6 +10,8 @@ import { CategoryService } from './services/category.service';
 import { ServiceService } from './services/service.service';
 import { PatientService } from './services/patient.service';
 import { DoctorService } from './services/doctor.service';
+import { HoursService } from './services/hours.service';
+import { ExceptionalHourService } from './services/exceptionalhour.service';
 
 // Components
 import { AppRoutingModule } from './app-routing.module';
@@ -28,6 +30,8 @@ import { ServiceComponent } from './components/service/service.component';
 import { FullPageModalComponent } from './components/includes/full-page-modal/full-page-modal.component';
 import { PatientComponent } from './components/patient/patient.component';
 import { DoctorComponent } from './components/doctor/doctor.component';
+import { HoursComponent } from './components/hours/hours.component';
+import { ExceptionalHourComponent } from './components/exceptionalhour/exceptionalhour.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { ReportService } from './services/reports.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -36,6 +40,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTableExporterModule } from 'mat-table-exporter';
 import { RegistrarFacturaComponent } from './components/factura/registrar-factura.component';
 import { FacturaService } from './services/factura.service';
+
 
 @NgModule({
   declarations: [
@@ -54,6 +59,8 @@ import { FacturaService } from './services/factura.service';
     FullPageModalComponent,
     PatientComponent,
     DoctorComponent,
+    HoursComponent,
+    ExceptionalHourComponent,
     ReportsComponent,
     RegistrarFacturaComponent,
     
@@ -75,6 +82,8 @@ import { FacturaService } from './services/factura.service';
     ServiceService,
     PatientService,
     DoctorService,
+    HoursService,
+    ExceptionalHourComponent,
     ReportService,
     FacturaService
   ],
