@@ -25,20 +25,17 @@ export class RegistrarFacturaComponent implements OnInit {
   public idFisioterapeuta: string;
   public idServicio: number;
   public fechaHasta: string;
-  public obs: string;
   public workbook = new Workbook();
-  public selectedFichaId: number = 0;
   public products: Array<any> = [];
-  public selectedService: any = {};
+  public selectedService: any = null;
+
+  public selectedFichaId: number = 0;
+  public obs: string;
+
+  
+
   clearSelectedService() {
-    this.selectedService = {
-      id: '',
-      name: '',
-      product: null,
-      flag: 'S',
-      code: '',
-      price: ''
-    };
+    this.selectedService = null;
   }
   
     
@@ -48,9 +45,9 @@ export class RegistrarFacturaComponent implements OnInit {
     const fecha:string = getFechaForQuery( new Date((new Date()).valueOf() - 1000*60*60*24));
     this.fechaDesde = `${fecha.substr(0,4)}-${fecha.substr(4,2)}-${fecha.substr(6)}`;
     this.fechaHasta = `${fecha.substr(0,4)}-${fecha.substr(4,2)}-${fecha.substr(6)}`;
-    this.idPatient = "0";
-    this.idFisioterapeuta = "0";
-    this.obs = "0";
+    this.idPatient = "";
+    this.idFisioterapeuta = "";
+    this.obs = "";
     this.idServicio = 0;
 
   }
@@ -77,34 +74,6 @@ export class RegistrarFacturaComponent implements OnInit {
     this.showAddModal = true;
     this.editingModal = true;
   }
-  downloadExcel(){
-      //create new excel work book
-    let workbook = new Workbook();    
-    //add name to sheet
-    let worksheet = workbook.addWorksheet("Employee Data");
-      //add column name
-    let header=["Name","Age"]
-    let headerRow = worksheet.addRow(header);
-    for (let x1 of this.services)
-    {
-      let x2=Object.keys(x1);
-      let temp=[]
-      for(let y of x2)
-      {
-        console.log(y)
-        temp.push(x1[y])
-      }
-      worksheet.addRow(temp)
-    }
-    //set downloadable file name
-    let fname="Emp Data Sep 2020"
-
-    //add data and file name and download
-    workbook.xlsx.writeBuffer().then((data) => {
-      let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-      fs.saveAs(blob, fname+'-'+new Date().valueOf()+'.xlsx');
-    });
-  }
 
   public get isValidSelectedDoctor(): boolean {
     return !!this.selectedReport &&
@@ -122,10 +91,11 @@ export class RegistrarFacturaComponent implements OnInit {
   async loadServicesFromServer() {
 
     this.products = await this._service.getAllProducts();
+    console.log(this.products);
   }
   ngOnInit(): void {
     this.loadService();
-    this.downloadPDF();
+
     this.getAllFicha();
     this.loadServicesFromServer();
     this.clearSelectedService();
@@ -147,47 +117,29 @@ export class RegistrarFacturaComponent implements OnInit {
     this.fichas = await this._service.getAllFicha();  
   }
   public get isValidSelectedService(): boolean {
-    return this.selectedService &&
-      this.selectedService.name &&
-      this.selectedService.product &&
-      this.selectedService.flag &&
-      this.selectedService.code &&
-      this.selectedService.price;
+    return true;
   }
   async confirmAction() {
 
     // Create new service
-    await this.createService();
+    await this.createDetalle();
   }
+
   async createService() {
-    //const newService = await this._service.createFacturaDetalle(cant:number, idPresentacionProducto:number,idServicio:number );
-    //this.services = this.services.concat(newService);
-    this.clearSelectedService();
-    this.showAddModal = false;
+    this.showAddModal=true
+    const newService = await this._service.createFacturaCabecera(this.obs, this.selectedFichaId );
+    this.services = this.services.concat(newService);
+    console.log(newService);
+    this.idServicio = newService.idServicio;
+    //this.clearSelectedService();
+    //this.showAddModal = false;
+  }
+  async createDetalle() {
+    this.showAddModal=false
+    console.log(this.selectedService);
+    const newService = await this._service.createFacturaDetalle(1, this.selectedService.idTipoProducto.idTipoProducto,this.idServicio );
+    console.log(newService);
   }
 
-  downloadPDF() {
-    // Extraemos el
-    const DATA = document.getElementById('htmlData') as HTMLInputElement;
-    const doc = new jsPDF('p', 'pt', 'a4');
-    const options = {
-      background: 'white',
-      scale: 3
-    };
-    html2canvas(DATA, options).then((canvas) => {
 
-      const img = canvas.toDataURL('image/PNG');
-
-      // Add image Canvas to PDF
-      const bufferX = 15;
-      const bufferY = 15;
-      const imgProps = (doc as any).getImageProperties(img);
-      const pdfWidth = doc.internal.pageSize.getWidth() - 2 * bufferX;
-      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-      doc.addImage(img, 'PNG', bufferX, bufferY, pdfWidth, pdfHeight, undefined, 'FAST');
-      return doc;
-    }).then((docResult) => {
-      docResult.save(`${new Date().toISOString()}_tutorial.pdf`);
-    });
-  }
 }

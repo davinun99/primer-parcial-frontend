@@ -82,7 +82,7 @@ export class FacturaService {
             "idServicio":idServicio
         }
     };
-    const result = await this.http.post<any>(this.api, requestObj, this.httpOptions).toPromise();
+    const result = await this.http.post<any>(this.api+"/"+idServicio+"/detalle", requestObj, this.httpOptions).toPromise();
     return result;
   }
   public async getAllProducts(): Promise<any[]> {
