@@ -75,4 +75,8 @@ export class FichaService {
         const { lista } = await this._http.get<any>(urlApi).toPromise();
         return lista;
     }
+    public async getAllFichas(): Promise<any> {
+        const { lista } = await this._http.get<any>(this.urlApi).toPromise();
+        return lista;
+    }
 }
