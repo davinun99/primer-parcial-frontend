@@ -52,6 +52,12 @@
     (back)="tab=''">
 </hours-list>
 
+<!-- HORARIO EXCEPCIONAL LIST -->
+
+<exceptionalhour-list
+    *ngIf="tab === 'horarioexc'" 
+    (back)="tab=''">
+</exceptionalhour-list>
 <!-- TITLE -->
 
 <div class="p-10 bg-grey-f2 text-grey-5">
@@ -89,6 +95,11 @@
     <button class="tab-item" (click)="tab='horario'">
         <div><strong>Horarios</strong></div>
         <p class="mt-10 text-grey-5 fs-13">Gestión de horarios.</p>
+        
+    </button>
+    <button class="tab-item" (click)="tab='horarioexc'">
+        <div><strong>Horarios Excepcionales</strong></div>
+        <p class="mt-10 text-grey-5 fs-13">Gestión de horarios excepcionales.</p>
         
     </button>
     <button class="tab-item" (click)="tab='report'">

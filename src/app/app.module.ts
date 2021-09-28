@@ -11,6 +11,7 @@ import { ServiceService } from './services/service.service';
 import { PatientService } from './services/patient.service';
 import { DoctorService } from './services/doctor.service';
 import { HoursService } from './services/hours.service';
+import { ExceptionalHourService } from './services/exceptionalhour.service';
 
 // Components
 import { AppRoutingModule } from './app-routing.module';
@@ -30,6 +31,7 @@ import { FullPageModalComponent } from './components/includes/full-page-modal/fu
 import { PatientComponent } from './components/patient/patient.component';
 import { DoctorComponent } from './components/doctor/doctor.component';
 import { HoursComponent } from './components/hours/hours.component';
+import { ExceptionalHourComponent } from './components/exceptionalhour/exceptionalhour.component';
 
 
 @NgModule({
@@ -50,6 +52,7 @@ import { HoursComponent } from './components/hours/hours.component';
     PatientComponent,
     DoctorComponent,
     HoursComponent,
+    ExceptionalHourComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,6 +68,7 @@ import { HoursComponent } from './components/hours/hours.component';
     PatientService,
     DoctorService,
     HoursService,
+    ExceptionalHourComponent,
   ],
   bootstrap: [AppComponent]
 })
